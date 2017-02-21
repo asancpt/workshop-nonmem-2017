@@ -1,0 +1,6 @@
+TABLE NO.     1: First Order Conditional Estimation: Problem=1 Subproblem=0 Superproblem1=0 Iteration1=0 Superproblem2=0 Iteration2=0
+ SUBJECT_NO   ID           ETA(1)       ETC(1,1)     OBJ
+            1            1 -8.60585E-02  3.00383E-03    56.056298274302648
+            2            2 -5.37577E-03  3.00908E-03    44.808254501950969
+            3            3  2.12996E-02  3.00995E-03    58.581669242278309
+            4            4  6.95750E-02  3.01046E-03    59.690034842044767

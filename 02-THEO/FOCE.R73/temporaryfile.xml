@@ -1,0 +1,2406 @@
+<?xml version="1.0" encoding="ASCII"?>
+<!DOCTYPE nm:output SYSTEM "output.dtd">
+<nm:output
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://namespaces.oreilly.com/xmlnut/address output.xsd"
+xmlns:nm="http://namespaces.oreilly.com/xmlnut/address"
+>
+<nm:start_datetime>2015-02-15T17:55:28.684</nm:start_datetime>
+<nm:control_stream><![CDATA[
+$PROB THEOPHYLLINE ORAL
+$INPUT ID AMT TIME DV BWT
+$DATA ../THEO.CSV
+$PRED
+  DOSE = 320
+  KA   = THETA(1) * EXP(ETA(1))
+  V    = THETA(2) * EXP(ETA(2))
+  K    = THETA(3) * EXP(ETA(3))
+
+  F    = DOSE / V * KA / (KA - K) * (EXP(-K*TIME) - EXP(-KA*TIME))
+  Y    = F + F * EPS(1) + EPS(2)
+
+$THETA
+  (0, 2)
+  (0, 50)
+  (0, 0.1)
+
+$OMEGA BLOCK(3)
+  0.2
+  0.1  0.2
+  0.1  0.1  0.2
+
+$SIGMA
+  0.1
+  0.1
+
+$EST MAX=9999 NOTBT NOOBT NOSBT NOABORT METHOD=COND
+$COV PRINT=ERS
+$TAB ID ETA(1) ETA(2) ETA(3) FIRSTONLY NOAPPEND FILE=INDIPARA.OUT
+$TAB ID AMT TIME BWT ONEHEADER FILE=FIT.OUT
+
+
+
+
+]]></nm:control_stream>
+<nm:nmtran><![CDATA[
+
+ WARNINGS AND ERRORS (IF ANY) FOR PROBLEM    1
+
+ (WARNING  2) NM-TRAN INFERS THAT THE DATA ARE POPULATION.
+
+ (WARNING  13) WITH USER-WRITTEN PRED OR $PRED, NM-TRAN CANNOT APPEND THE
+ MDV DATA ITEM.
+]]></nm:nmtran>
+<nm:nonmem nm:version='7.3.0'>
+<nm:license_information><![CDATA[
+License Registered to: Asan Medical Center
+Expiration Date:    14 DEC 2015
+Current Date:       15 FEB 2015
+Days until program expires : 299
+]]></nm:license_information>
+<nm:program_information><![CDATA[
+1NONLINEAR MIXED EFFECTS MODEL PROGRAM (NONMEM) VERSION 7.3.0
+ ORIGINALLY DEVELOPED BY STUART BEAL, LEWIS SHEINER, AND ALISON BOECKMANN
+ CURRENT DEVELOPERS ARE ROBERT BAUER, ICON DEVELOPMENT SOLUTIONS,
+ AND ALISON BOECKMANN. IMPLEMENTATION, EFFICIENCY, AND STANDARDIZATION
+ PERFORMED BY NOUS INFOSYSTEMS.
+]]></nm:program_information>
+<nm:problem nm:number='1' nm:subproblem='0' nm:superproblem1='0' nm:iteration1='0' nm:superproblem2='0' nm:iteration2='0'>
+<nm:problem_title>THEOPHYLLINE ORAL</nm:problem_title>
+<nm:problem_information><![CDATA[
+
+ PROBLEM NO.:         1
+ THEOPHYLLINE ORAL
+0DATA CHECKOUT RUN:              NO
+ DATA SET LOCATED ON UNIT NO.:    2
+ THIS UNIT TO BE REWOUND:        NO
+ NO. OF DATA RECS IN DATA SET:      132
+ NO. OF DATA ITEMS IN DATA SET:   5
+ ID DATA ITEM IS DATA ITEM NO.:   1
+ DEP VARIABLE IS DATA ITEM NO.:   4
+0LABELS FOR DATA ITEMS:
+ ID AMT TIME DV BWT
+0FORMAT FOR DATA:
+ (5E6.0)
+
+ TOT. NO. OF OBS RECS:      132
+ TOT. NO. OF INDIVIDUALS:     12
+0LENGTH OF THETA:   3
+0DEFAULT THETA BOUNDARY TEST OMITTED:   YES
+0OMEGA HAS BLOCK FORM:
+  1
+  1  1
+  1  1  1
+0DEFAULT OMEGA BOUNDARY TEST OMITTED:   YES
+0SIGMA HAS SIMPLE DIAGONAL FORM WITH DIMENSION:   2
+0DEFAULT SIGMA BOUNDARY TEST OMITTED:   YES
+0INITIAL ESTIMATE OF THETA:
+ LOWER BOUND    INITIAL EST    UPPER BOUND
+  0.0000E+00     0.2000E+01     0.1000E+07
+  0.0000E+00     0.5000E+02     0.1000E+07
+  0.0000E+00     0.1000E+00     0.1000E+07
+0INITIAL ESTIMATE OF OMEGA:
+ BLOCK SET NO.   BLOCK                                                                    FIXED
+        1                                                                                   NO
+                  0.2000E+00
+                  0.1000E+00   0.2000E+00
+                  0.1000E+00   0.1000E+00   0.2000E+00
+0INITIAL ESTIMATE OF SIGMA:
+ 0.1000E+00
+ 0.0000E+00   0.1000E+00
+0COVARIANCE STEP OMITTED:        NO
+ R MATRIX PRINTED:              YES
+ S MATRIX PRINTED:              YES
+ EIGENVLS. PRINTED:             YES
+ SPECIAL COMPUTATION:            NO
+ COMPRESSED FORMAT:              NO
+ SIGDIGITS ETAHAT (SIGLO):                  -1
+ SIGDIGITS GRADIENTS (SIGL):                -1
+ RELATIVE TOLERANCE (TOL):                  -1
+ ABSOLUTE TOLERANCE-ADVAN 9,13 ONLY (ATOL): -1
+ EXCLUDE COV FOR FOCE (NOFCOV):              NO
+ RESUME COV ANALYSIS (RESUME):               NO
+0TABLES STEP OMITTED:    NO
+ NO. OF TABLES:           2
+ SEED NUMBER (SEED):    11456
+ RANMETHOD:
+ MC SAMPLES (ESEED):    300
+ WRES SQUARE ROOT TYPE:            EIGENVALUE
+0-- TABLE   1 --
+0FIRST RECORDS ONLY:    YES
+04 COLUMNS APPENDED:     NO
+ PRINTED:               YES
+ FOR TABLE FILE,
+ HEADER:                YES
+ FILE TO BE FORWARDED:   NO
+ FORMAT:                S1PE11.4
+ LFORMAT:
+ RFORMAT:
+0USER-CHOSEN ITEMS:
+ ID ETA1 ETA2 ETA3
+0-- TABLE   2 --
+ PRINTED:               YES
+ FOR TABLE FILE,
+ HEADER:                YES
+ FILE TO BE FORWARDED:   NO
+ FORMAT:                S1PE11.4
+ LFORMAT:
+ RFORMAT:
+0USER-CHOSEN ITEMS:
+ ID AMT TIME BWT
+]]></nm:problem_information>
+<nm:estimation nm:number='1' nm:type='0'>
+<nm:table_series>1</nm:table_series>
+<nm:estimation_method>foce</nm:estimation_method>
+<nm:estimation_title>First Order Conditional Estimation</nm:estimation_title>
+<nm:monitor>
+<nm:obj nm:iteration='0'>144.58524817433491</nm:obj>
+<nm:obj nm:iteration='54'>47.702494027142933</nm:obj>
+</nm:monitor>
+<nm:termination_status>0</nm:termination_status>
+<nm:termination_nfuncevals>549</nm:termination_nfuncevals>
+<nm:termination_sigdigits>3.0620129826526004</nm:termination_sigdigits>
+<nm:termination_information><![CDATA[
+0MINIMIZATION SUCCESSFUL
+ NO. OF FUNCTION EVALUATIONS USED:      549
+ NO. OF SIG. DIGITS IN FINAL EST.:  3.1
+]]></nm:termination_information>
+<nm:termination_txtmsg>
+<nm:val nm:name='1'>37</nm:val>
+</nm:termination_txtmsg>
+<nm:etabar>
+<nm:row nm:rname='SUBPOP1'>
+<nm:col nm:cname='ETA1'>-1.6910969909021472</nm:col>
+<nm:col nm:cname='ETA2'>-0.65876150824311197</nm:col>
+<nm:col nm:cname='ETA3'>-1.7570021402210139</nm:col>
+</nm:row>
+</nm:etabar>
+<nm:etabarse>
+<nm:row nm:rname='SUBPOP1'>
+<nm:col nm:cname='ETA1'>0.15159214708638499</nm:col>
+<nm:col nm:cname='ETA2'>4.46081653830825084E-002</nm:col>
+<nm:col nm:cname='ETA3'>5.12071838379470623E-002</nm:col>
+</nm:row>
+</nm:etabarse>
+<nm:etabarn>
+<nm:row nm:rname='SUBPOP1'>
+<nm:col nm:cname='ETA1'>12</nm:col>
+<nm:col nm:cname='ETA2'>12</nm:col>
+<nm:col nm:cname='ETA3'>12</nm:col>
+</nm:row>
+</nm:etabarn>
+<nm:etabarpval>
+<nm:row nm:rname='SUBPOP1'>
+<nm:col nm:cname='ETA1'>6.90152771342428593E-029</nm:col>
+<nm:col nm:cname='ETA2'>2.47868013045673297E-049</nm:col>
+<nm:col nm:cname='ETA3'>6.04850340232569195E-258</nm:col>
+</nm:row>
+</nm:etabarpval>
+<nm:etashrink>
+<nm:row nm:rname='SUBPOP1'>
+<nm:col nm:cname='ETA1'>69.060664804540139</nm:col>
+<nm:col nm:cname='ETA2'>76.087060414718223</nm:col>
+<nm:col nm:cname='ETA3'>89.541967061393379</nm:col>
+</nm:row>
+</nm:etashrink>
+<nm:ebvshrink>
+<nm:row nm:rname='SUBPOP1'>
+<nm:col nm:cname='EBV1'>0.76364200800832505</nm:col>
+<nm:col nm:cname='EBV2'>0.15765580893234432</nm:col>
+<nm:col nm:cname='EBV3'>7.53043788272789172E-002</nm:col>
+</nm:row>
+</nm:ebvshrink>
+<nm:epsshrink>
+<nm:row nm:rname='SUBPOP1'>
+<nm:col nm:cname='EPS1'>14.668317652123630</nm:col>
+<nm:col nm:cname='EPS2'>12.665241673273142</nm:col>
+</nm:row>
+</nm:epsshrink>
+<nm:estimation_elapsed_time>0.66</nm:estimation_elapsed_time>
+<nm:covariance_information><![CDATA[
+]]></nm:covariance_information>
+<nm:covariance_status nm:error='0' nm:numnegeigenvalues='-1' nm:mineigenvalue='0.0000000000000000' nm:maxeigenvalue='0.0000000000000000' nm:rms='0.0000000000000000'/>
+<nm:covariance_elapsed_time>0.34</nm:covariance_elapsed_time>
+<nm:final_objective_function_text>MINIMUM VALUE OF OBJECTIVE FUNCTION</nm:final_objective_function_text>
+<nm:final_objective_function>47.702494027142933</nm:final_objective_function>
+<nm:theta>
+<nm:val nm:name='1'>9.4190821647255962</nm:val>
+<nm:val nm:name='2'>64.180991093853152</nm:val>
+<nm:val nm:name='3'>0.47607574581943185</nm:val>
+</nm:theta>
+<nm:omega>
+<nm:row nm:rname='1'>
+<nm:col nm:cname='1'>3.1426879477331591</nm:col>
+</nm:row>
+<nm:row nm:rname='2'>
+<nm:col nm:cname='1'>1.1569197563939417</nm:col>
+<nm:col nm:cname='2'>0.45554637815546350</nm:col>
+</nm:row>
+<nm:row nm:rname='3'>
+<nm:col nm:cname='1'>2.9498578554185575</nm:col>
+<nm:col nm:cname='2'>1.1617195701475942</nm:col>
+<nm:col nm:cname='3'>3.1385682767726966</nm:col>
+</nm:row>
+</nm:omega>
+<nm:sigma>
+<nm:row nm:rname='1'>
+<nm:col nm:cname='1'>9.58784410051310015E-002</nm:col>
+</nm:row>
+<nm:row nm:rname='2'>
+<nm:col nm:cname='1'>0.0000000000000000</nm:col>
+<nm:col nm:cname='2'>4.71841361107632126E-002</nm:col>
+</nm:row>
+</nm:sigma>
+<nm:omegac>
+<nm:row nm:rname='1'>
+<nm:col nm:cname='1'>1.7727628007528697</nm:col>
+</nm:row>
+<nm:row nm:rname='2'>
+<nm:col nm:cname='1'>0.96691057123375035</nm:col>
+<nm:col nm:cname='2'>0.67494175908404386</nm:col>
+</nm:row>
+<nm:row nm:rname='3'>
+<nm:col nm:cname='1'>0.93925749386515500</nm:col>
+<nm:col nm:cname='2'>0.97155908239944921</nm:col>
+<nm:col nm:cname='3'>1.7716004845259827</nm:col>
+</nm:row>
+</nm:omegac>
+<nm:sigmac>
+<nm:row nm:rname='1'>
+<nm:col nm:cname='1'>0.30964244057482010</nm:col>
+</nm:row>
+<nm:row nm:rname='2'>
+<nm:col nm:cname='1'>0.0000000000000000</nm:col>
+<nm:col nm:cname='2'>0.21721909702133285</nm:col>
+</nm:row>
+</nm:sigmac>
+<nm:thetase>
+<nm:val nm:name='1'>4.9357241249839463</nm:val>
+<nm:val nm:name='2'>14.742233348439257</nm:val>
+<nm:val nm:name='3'>0.34789755147732809</nm:val>
+</nm:thetase>
+<nm:omegase>
+<nm:row nm:rname='1'>
+<nm:col nm:cname='1'>1.9501159365238849</nm:col>
+</nm:row>
+<nm:row nm:rname='2'>
+<nm:col nm:cname='1'>0.33219355693400604</nm:col>
+<nm:col nm:cname='2'>0.26579651184805886</nm:col>
+</nm:row>
+<nm:row nm:rname='3'>
+<nm:col nm:cname='1'>0.56834159305837084</nm:col>
+<nm:col nm:cname='2'>0.77016508915908222</nm:col>
+<nm:col nm:cname='3'>2.6917793196236568</nm:col>
+</nm:row>
+</nm:omegase>
+<nm:sigmase>
+<nm:row nm:rname='1'>
+<nm:col nm:cname='1'>0.11106038528782818</nm:col>
+</nm:row>
+<nm:row nm:rname='2'>
+<nm:col nm:cname='1'>10000000000.000000</nm:col>
+<nm:col nm:cname='2'>1.40619448269178604E-002</nm:col>
+</nm:row>
+</nm:sigmase>
+<nm:omegacse>
+<nm:row nm:rname='1'>
+<nm:col nm:cname='1'>0.55002167681307834</nm:col>
+</nm:row>
+<nm:row nm:rname='2'>
+<nm:col nm:cname='1'>1.84596297269094857E-002</nm:col>
+<nm:col nm:cname='2'>0.19690329444778201</nm:col>
+</nm:row>
+<nm:row nm:rname='3'>
+<nm:col nm:cname='1'>3.28509119818698250E-002</nm:col>
+<nm:col nm:cname='2'>2.17058883381137380E-002</nm:col>
+<nm:col nm:cname='3'>0.75970269345006458</nm:col>
+</nm:row>
+</nm:omegacse>
+<nm:sigmacse>
+<nm:row nm:rname='1'>
+<nm:col nm:cname='1'>0.17933650355173489</nm:col>
+</nm:row>
+<nm:row nm:rname='2'>
+<nm:col nm:cname='1'>10000000000.000000</nm:col>
+<nm:col nm:cname='2'>3.23681136229400021E-002</nm:col>
+</nm:row>
+</nm:sigmacse>
+<nm:covariance>
+<nm:row nm:rname='THETA1'>
+<nm:col nm:cname='THETA1'>24.361372637948541</nm:col>
+</nm:row>
+<nm:row nm:rname='THETA2'>
+<nm:col nm:cname='THETA1'>-38.964759466912959</nm:col>
+<nm:col nm:cname='THETA2'>217.33344409983454</nm:col>
+</nm:row>
+<nm:row nm:rname='THETA3'>
+<nm:col nm:cname='THETA1'>-1.3860005976558978</nm:col>
+<nm:col nm:cname='THETA2'>3.1143092203316645</nm:col>
+<nm:col nm:cname='THETA3'>0.12103270632392016</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(1,1)'>
+<nm:col nm:cname='THETA1'>9.0983981413160073</nm:col>
+<nm:col nm:cname='THETA2'>-16.268591975314262</nm:col>
+<nm:col nm:cname='THETA3'>-0.61420874088269484</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>3.8029521658844287</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(1,2)'>
+<nm:col nm:cname='THETA1'>0.74092902348629730</nm:col>
+<nm:col nm:cname='THETA2'>1.7718108556954482</nm:col>
+<nm:col nm:cname='THETA3'>-4.68267726179080676E-002</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>0.34689252713638702</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>0.11035255926846672</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(1,3)'>
+<nm:col nm:cname='THETA1'>-0.69045565991081892</nm:col>
+<nm:col nm:cname='THETA2'>3.7170669682577069</nm:col>
+<nm:col nm:cname='THETA3'>0.14084027073938452</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-0.39187565046215039</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>9.76145333444358720E-003</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>0.32301216640012681</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(2,2)'>
+<nm:col nm:cname='THETA1'>-0.76780336777552094</nm:col>
+<nm:col nm:cname='THETA2'>3.8325949333098612</nm:col>
+<nm:col nm:cname='THETA3'>5.39990036951865926E-002</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-0.29308443664572126</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>3.46180896093790796E-002</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>6.29833143748832341E-002</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>7.06477857105952955E-002</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(2,3)'>
+<nm:col nm:cname='THETA1'>-3.0774951099095191</nm:col>
+<nm:col nm:cname='THETA2'>9.7054110518887526</nm:col>
+<nm:col nm:cname='THETA3'>0.24663919854493174</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-1.2965527775068286</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-2.21342474561577428E-002</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>0.27920015336653542</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>0.17449398864268154</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>0.59315426455941700</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(3,3)'>
+<nm:col nm:cname='THETA1'>-10.981592750162994</nm:col>
+<nm:col nm:cname='THETA2'>24.200668195778526</nm:col>
+<nm:col nm:cname='THETA3'>0.93428694856116412</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-4.8393880038307051</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-0.37215173148631209</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>1.0462245613822958</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>0.42326019379118429</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>1.9189661707048227</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>7.2456759055535969</nm:col>
+</nm:row>
+<nm:row nm:rname='SIGMA(1,1)'>
+<nm:col nm:cname='THETA1'>-0.42183161272493674</nm:col>
+<nm:col nm:cname='THETA2'>1.3337628466872640</nm:col>
+<nm:col nm:cname='THETA3'>3.57550625392201726E-002</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-0.18274163941367547</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-3.79709450171208333E-003</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>4.26391647563737625E-002</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>2.39873903261008659E-002</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>8.39015522284056181E-002</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>0.27654367593216334</nm:col>
+<nm:col nm:cname='SIGMA(1,1)'>1.23344091802808399E-002</nm:col>
+</nm:row>
+<nm:row nm:rname='SIGMA(1,2)'>
+<nm:col nm:cname='THETA1'>0.0000000000000000</nm:col>
+<nm:col nm:cname='THETA2'>0.0000000000000000</nm:col>
+<nm:col nm:cname='THETA3'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='SIGMA(1,1)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='SIGMA(1,2)'>0.0000000000000000</nm:col>
+</nm:row>
+<nm:row nm:rname='SIGMA(2,2)'>
+<nm:col nm:cname='THETA1'>-5.79015204067249434E-002</nm:col>
+<nm:col nm:cname='THETA2'>5.08426184572284071E-002</nm:col>
+<nm:col nm:cname='THETA3'>3.93142067887163656E-003</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-2.32688310001632342E-002</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-2.95398614192024251E-003</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>3.19066258286108831E-003</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>1.09476325486092263E-003</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>7.30768233761179206E-003</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>3.14322414557920357E-002</nm:col>
+<nm:col nm:cname='SIGMA(1,1)'>1.02102092562748187E-003</nm:col>
+<nm:col nm:cname='SIGMA(1,2)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='SIGMA(2,2)'>1.97738292315281962E-004</nm:col>
+</nm:row>
+</nm:covariance>
+<nm:correlation>
+<nm:row nm:rname='THETA1'>
+<nm:col nm:cname='THETA1'>4.9357241249839463</nm:col>
+</nm:row>
+<nm:row nm:rname='THETA2'>
+<nm:col nm:cname='THETA1'>-0.53549798503236545</nm:col>
+<nm:col nm:cname='THETA2'>14.742233348439257</nm:col>
+</nm:row>
+<nm:row nm:rname='THETA3'>
+<nm:col nm:cname='THETA1'>-0.80716285523388309</nm:col>
+<nm:col nm:cname='THETA2'>0.60722141317680234</nm:col>
+<nm:col nm:cname='THETA3'>0.34789755147732809</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(1,1)'>
+<nm:col nm:cname='THETA1'>0.94526511063726548</nm:col>
+<nm:col nm:cname='THETA2'>-0.56588248807832808</nm:col>
+<nm:col nm:cname='THETA3'>-0.90532432408463104</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>1.9501159365238849</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(1,2)'>
+<nm:col nm:cname='THETA1'>0.45189186678333476</nm:col>
+<nm:col nm:cname='THETA2'>0.36179525958303954</nm:col>
+<nm:col nm:cname='THETA3'>-0.40518340474837122</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>0.53548006569510453</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>0.33219355693400604</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(1,3)'>
+<nm:col nm:cname='THETA1'>-0.24613619143967480</nm:col>
+<nm:col nm:cname='THETA2'>0.44363690228805930</nm:col>
+<nm:col nm:cname='THETA3'>0.71230507535028398</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-0.35357244143891459</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>5.17027731058642970E-002</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>0.56834159305837084</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(2,2)'>
+<nm:col nm:cname='THETA1'>-0.58526136790176864</nm:col>
+<nm:col nm:cname='THETA2'>0.97809347735468755</nm:col>
+<nm:col nm:cname='THETA3'>0.58396268612793445</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-0.56543547006433881</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>0.39206909995944123</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>0.41693350177918864</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>0.26579651184805886</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(2,3)'>
+<nm:col nm:cname='THETA1'>-0.80958539617156533</nm:col>
+<nm:col nm:cname='THETA2'>0.85480454760107460</nm:col>
+<nm:col nm:cname='THETA3'>0.92050658516268880</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-0.86326859092234276</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-8.65146644197933024E-002</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>0.63785561605054930</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>0.85240770010897526</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>0.77016508915908222</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(3,3)'>
+<nm:col nm:cname='THETA1'>-0.82656117962756370</nm:col>
+<nm:col nm:cname='THETA2'>0.60985224080857126</nm:col>
+<nm:col nm:cname='THETA3'>0.99767584534192166</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-0.92191431807480395</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-0.41618783988265462</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>0.68387388376251079</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>0.59158710231527156</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>0.92564410118849960</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>2.6917793196236568</nm:col>
+</nm:row>
+<nm:row nm:rname='SIGMA(1,1)'>
+<nm:col nm:cname='THETA1'>-0.76953622775497066</nm:col>
+<nm:col nm:cname='THETA2'>0.81462204491307433</nm:col>
+<nm:col nm:cname='THETA3'>0.92539467061328118</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-0.84375801160185260</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-0.10292029570684948</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>0.67552289496522688</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>0.81259575469646872</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>0.98090509702909201</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>0.92504977825250467</nm:col>
+<nm:col nm:cname='SIGMA(1,1)'>0.11106038528782818</nm:col>
+</nm:row>
+<nm:row nm:rname='SIGMA(1,2)'>
+<nm:col nm:cname='THETA1'>0.0000000000000000</nm:col>
+<nm:col nm:cname='THETA2'>0.0000000000000000</nm:col>
+<nm:col nm:cname='THETA3'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='SIGMA(1,1)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='SIGMA(1,2)'>0.0000000000000000</nm:col>
+</nm:row>
+<nm:row nm:rname='SIGMA(2,2)'>
+<nm:col nm:cname='THETA1'>-0.83424516963717721</nm:col>
+<nm:col nm:cname='THETA2'>0.24525577269875257</nm:col>
+<nm:col nm:cname='THETA3'>0.80362373639644646</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-0.84853301438982587</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-0.63237087446032358</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>0.39923264814521797</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>0.29290416367145722</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>0.67476172880516339</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>0.83040606059376620</nm:col>
+<nm:col nm:cname='SIGMA(1,1)'>0.65377766178130059</nm:col>
+<nm:col nm:cname='SIGMA(1,2)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='SIGMA(2,2)'>1.40619448269178604E-002</nm:col>
+</nm:row>
+</nm:correlation>
+<nm:invcovariance>
+<nm:row nm:rname='THETA1'>
+<nm:col nm:cname='THETA1'>52.864625826230601</nm:col>
+</nm:row>
+<nm:row nm:rname='THETA2'>
+<nm:col nm:cname='THETA1'>-31.232606774334048</nm:col>
+<nm:col nm:cname='THETA2'>19.158665749315116</nm:col>
+</nm:row>
+<nm:row nm:rname='THETA3'>
+<nm:col nm:cname='THETA1'>4631.6814236773216</nm:col>
+<nm:col nm:cname='THETA2'>-2762.7810619366751</nm:col>
+<nm:col nm:cname='THETA3'>430550.21591913467</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(1,1)'>
+<nm:col nm:cname='THETA1'>307.94143424046155</nm:col>
+<nm:col nm:cname='THETA2'>-189.15116623210616</nm:col>
+<nm:col nm:cname='THETA3'>27041.577463697078</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>2050.7385456276957</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(1,2)'>
+<nm:col nm:cname='THETA1'>-798.00739342413146</nm:col>
+<nm:col nm:cname='THETA2'>461.49702475837444</nm:col>
+<nm:col nm:cname='THETA3'>-51730.519561420464</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-6006.5295556814672</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>39169.781725447247</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(1,3)'>
+<nm:col nm:cname='THETA1'>-605.48831615632844</nm:col>
+<nm:col nm:cname='THETA2'>375.72850127733540</nm:col>
+<nm:col nm:cname='THETA3'>-60237.175008347665</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-3501.4523263382171</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>1352.9914005356384</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>9882.5858382861152</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(2,2)'>
+<nm:col nm:cname='THETA1'>1647.1537341745184</nm:col>
+<nm:col nm:cname='THETA2'>-957.23522052942678</nm:col>
+<nm:col nm:cname='THETA3'>119522.35302647130</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>11044.040267331064</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-57874.756203064775</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>-9019.7113321997058</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>104762.98099965716</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(2,3)'>
+<nm:col nm:cname='THETA1'>1221.9861587153059</nm:col>
+<nm:col nm:cname='THETA2'>-754.41036482239303</nm:col>
+<nm:col nm:cname='THETA3'>110981.98809697456</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>7596.3011625831141</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-17690.030833263529</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>-15201.045157945695</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>27094.788439297219</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>37203.020083442621</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(3,3)'>
+<nm:col nm:cname='THETA1'>-546.32451036986993</nm:col>
+<nm:col nm:cname='THETA2'>321.84368078850468</nm:col>
+<nm:col nm:cname='THETA3'>-48555.744526857015</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-3277.6691182786990</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>9368.0201898346149</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>6019.7129097416637</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>-16324.524468261870</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>-14170.379477235945</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>6154.2629790417950</nm:col>
+</nm:row>
+<nm:row nm:rname='SIGMA(1,1)'>
+<nm:col nm:cname='THETA1'>-1638.9996338132828</nm:col>
+<nm:col nm:cname='THETA2'>990.25304385950767</nm:col>
+<nm:col nm:cname='THETA3'>-146181.94054932089</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-9548.3734688190616</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>21890.258510681888</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>19869.379372969823</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>-47563.569093030390</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>-39167.280242340465</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>16851.441181446724</nm:col>
+<nm:col nm:cname='SIGMA(1,1)'>54513.171863399111</nm:col>
+</nm:row>
+<nm:row nm:rname='SIGMA(1,2)'>
+<nm:col nm:cname='THETA1'>0.0000000000000000</nm:col>
+<nm:col nm:cname='THETA2'>0.0000000000000000</nm:col>
+<nm:col nm:cname='THETA3'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='SIGMA(1,1)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='SIGMA(1,2)'>0.0000000000000000</nm:col>
+</nm:row>
+<nm:row nm:rname='SIGMA(2,2)'>
+<nm:col nm:cname='THETA1'>6535.7685531559800</nm:col>
+<nm:col nm:cname='THETA2'>-3662.0688940310883</nm:col>
+<nm:col nm:cname='THETA3'>597691.35591866763</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>37696.534868267554</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-95307.762430207425</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>-75328.277481222656</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>191854.39107658999</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>150014.90093582286</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>-71450.852206446332</nm:col>
+<nm:col nm:cname='SIGMA(1,1)'>-194712.64345867233</nm:col>
+<nm:col nm:cname='SIGMA(1,2)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='SIGMA(2,2)'>961762.63117019320</nm:col>
+</nm:row>
+</nm:invcovariance>
+<nm:rmatrix>
+<nm:row nm:rname='THETA1'>
+<nm:col nm:cname='THETA1'>0.53023978983771181</nm:col>
+</nm:row>
+<nm:row nm:rname='THETA2'>
+<nm:col nm:cname='THETA1'>-0.19234604260948657</nm:col>
+<nm:col nm:cname='THETA2'>0.18727890112292428</nm:col>
+</nm:row>
+<nm:row nm:rname='THETA3'>
+<nm:col nm:cname='THETA1'>-0.63449946970851412</nm:col>
+<nm:col nm:cname='THETA2'>-3.6018245694780147</nm:col>
+<nm:col nm:cname='THETA3'>408.03200116224099</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(1,1)'>
+<nm:col nm:cname='THETA1'>-0.85705955148873525</nm:col>
+<nm:col nm:cname='THETA2'>0.11523799046257678</nm:col>
+<nm:col nm:cname='THETA3'>-4.5745594675925974</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>81.533859832978749</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(1,2)'>
+<nm:col nm:cname='THETA1'>0.98954678183843880</nm:col>
+<nm:col nm:cname='THETA2'>0.47832893733246334</nm:col>
+<nm:col nm:cname='THETA3'>5.8861755735995303</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-418.10875711850093</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>3720.2610236108985</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(1,3)'>
+<nm:col nm:cname='THETA1'>-1.5056627025824543</nm:col>
+<nm:col nm:cname='THETA2'>0.63208107065889818</nm:col>
+<nm:col nm:cname='THETA3'>10.717299236456803</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>4.3887506084137673</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-588.79040344987152</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>218.51582226612783</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(2,2)'>
+<nm:col nm:cname='THETA1'>3.5954848827752088</nm:col>
+<nm:col nm:cname='THETA2'>-4.4742395069720597</nm:col>
+<nm:col nm:cname='THETA3'>41.668729894381272</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>532.34811361870982</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-6609.7125297709808</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>1417.3936932677977</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>19911.636786709551</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(2,3)'>
+<nm:col nm:cname='THETA1'>3.2386205761381097</nm:col>
+<nm:col nm:cname='THETA2'>-3.2164014772965799</nm:col>
+<nm:col nm:cname='THETA3'>135.22570390333718</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-8.4276880873942961</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>1377.8455853989087</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>-512.59264466154343</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>-8370.5689970709282</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>5023.3764703433153</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(3,3)'>
+<nm:col nm:cname='THETA1'>0.13631500591309864</nm:col>
+<nm:col nm:cname='THETA2'>0.93650522830811012</nm:col>
+<nm:col nm:cname='THETA3'>-68.149141604023228</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-0.50623566975776724</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>24.144696386154614</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>-8.9159357615213359</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>866.83337553328306</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>-702.20835393223911</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>142.08947509045743</nm:col>
+</nm:row>
+<nm:row nm:rname='SIGMA(1,1)'>
+<nm:col nm:cname='THETA1'>1.0986257029502435</nm:col>
+<nm:col nm:cname='THETA2'>-6.3456813176343232</nm:col>
+<nm:col nm:cname='THETA3'>-398.74741578445122</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>65.212743532096781</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-255.69137706122871</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>-28.996463105979615</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>334.74749257081686</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>-0.58151538423622640</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>12.911330596439877</nm:col>
+<nm:col nm:cname='SIGMA(1,1)'>2089.4482202918648</nm:col>
+</nm:row>
+<nm:row nm:rname='SIGMA(1,2)'>
+<nm:col nm:cname='THETA1'>0.0000000000000000</nm:col>
+<nm:col nm:cname='THETA2'>0.0000000000000000</nm:col>
+<nm:col nm:cname='THETA3'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='SIGMA(1,1)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='SIGMA(1,2)'>0.0000000000000000</nm:col>
+</nm:row>
+<nm:row nm:rname='SIGMA(2,2)'>
+<nm:col nm:cname='THETA1'>0.71065880277896953</nm:col>
+<nm:col nm:cname='THETA2'>-1.3039079785903005</nm:col>
+<nm:col nm:cname='THETA3'>-331.36577553211987</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-6.5246574506877462</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-160.21596309853572</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>68.184254167390804</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>766.40994783182896</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>-419.17494378024844</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>47.762037360947659</nm:col>
+<nm:col nm:cname='SIGMA(1,1)'>431.30219103961264</nm:col>
+<nm:col nm:cname='SIGMA(1,2)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='SIGMA(2,2)'>11426.892269596805</nm:col>
+</nm:row>
+</nm:rmatrix>
+<nm:smatrix>
+<nm:row nm:rname='THETA1'>
+<nm:col nm:cname='THETA1'>0.52551486476011422</nm:col>
+</nm:row>
+<nm:row nm:rname='THETA2'>
+<nm:col nm:cname='THETA1'>-0.22465619500598885</nm:col>
+<nm:col nm:cname='THETA2'>0.23252686895828692</nm:col>
+</nm:row>
+<nm:row nm:rname='THETA3'>
+<nm:col nm:cname='THETA1'>-2.6197112420423823</nm:col>
+<nm:col nm:cname='THETA2'>-1.5813215125526208</nm:col>
+<nm:col nm:cname='THETA3'>178.26291920183581</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(1,1)'>
+<nm:col nm:cname='THETA1'>-2.2544137791718839</nm:col>
+<nm:col nm:cname='THETA2'>2.3889385208921672</nm:col>
+<nm:col nm:cname='THETA3'>-47.561921338297736</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>62.619260415982922</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(1,2)'>
+<nm:col nm:cname='THETA1'>24.884431317362765</nm:col>
+<nm:col nm:cname='THETA2'>-16.293119855799013</nm:col>
+<nm:col nm:cname='THETA3'>121.87573173728717</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-317.12032325067929</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>3019.8816862289727</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(1,3)'>
+<nm:col nm:cname='THETA1'>-7.6520697227754946</nm:col>
+<nm:col nm:cname='THETA2'>2.6378237671981721</nm:col>
+<nm:col nm:cname='THETA3'>59.933286686840546</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>10.263945536135964</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-648.41270795859373</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>261.56885742254610</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(2,2)'>
+<nm:col nm:cname='THETA1'>-46.980055170001521</nm:col>
+<nm:col nm:cname='THETA2'>15.796986007757145</nm:col>
+<nm:col nm:cname='THETA3'>279.02051054135171</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>370.25689201937655</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-5829.4812573490872</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>1710.0997830747397</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>17953.638533590281</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(2,3)'>
+<nm:col nm:cname='THETA1'>17.899084280560139</nm:col>
+<nm:col nm:cname='THETA2'>-2.9362657469404927</nm:col>
+<nm:col nm:cname='THETA3'>-251.45953379555604</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-49.612852787827372</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>2019.9229075341104</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>-751.08025669713277</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>-8360.8912929511116</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>4385.0075751501408</nm:col>
+</nm:row>
+<nm:row nm:rname='OMEGA(3,3)'>
+<nm:col nm:cname='THETA1'>0.36016691270339929</nm:col>
+<nm:col nm:cname='THETA2'>-6.48020634088956448E-003</nm:col>
+<nm:col nm:cname='THETA3'>-2.4276202814938523</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>12.791568222648349</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>-107.60661753954339</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>13.723879420934933</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>722.77105504366943</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>-428.30433477675564</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>72.694770877269335</nm:col>
+</nm:row>
+<nm:row nm:rname='SIGMA(1,1)'>
+<nm:col nm:cname='THETA1'>10.939813766634785</nm:col>
+<nm:col nm:cname='THETA2'>-14.357544223570070</nm:col>
+<nm:col nm:cname='THETA3'>-170.05495185902856</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-75.504214529952989</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>105.26759807592597</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>50.853903959267825</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>153.08181260617380</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>60.502505472090860</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>-60.108795876198769</nm:col>
+<nm:col nm:cname='SIGMA(1,1)'>2267.0591602245408</nm:col>
+</nm:row>
+<nm:row nm:rname='SIGMA(1,2)'>
+<nm:col nm:cname='THETA1'>0.0000000000000000</nm:col>
+<nm:col nm:cname='THETA2'>0.0000000000000000</nm:col>
+<nm:col nm:cname='THETA3'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='SIGMA(1,1)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='SIGMA(1,2)'>0.0000000000000000</nm:col>
+</nm:row>
+<nm:row nm:rname='SIGMA(2,2)'>
+<nm:col nm:cname='THETA1'>23.990080947990357</nm:col>
+<nm:col nm:cname='THETA2'>-21.912215490606723</nm:col>
+<nm:col nm:cname='THETA3'>119.94273385003987</nm:col>
+<nm:col nm:cname='OMEGA(1,1)'>-396.11478427422520</nm:col>
+<nm:col nm:cname='OMEGA(1,2)'>2443.6527126515139</nm:col>
+<nm:col nm:cname='OMEGA(1,3)'>-302.78034740793612</nm:col>
+<nm:col nm:cname='OMEGA(2,2)'>-2896.4884733171475</nm:col>
+<nm:col nm:cname='OMEGA(2,3)'>428.17649590060074</nm:col>
+<nm:col nm:cname='OMEGA(3,3)'>32.953813707053058</nm:col>
+<nm:col nm:cname='SIGMA(1,1)'>1489.1807509932423</nm:col>
+<nm:col nm:cname='SIGMA(1,2)'>0.0000000000000000</nm:col>
+<nm:col nm:cname='SIGMA(2,2)'>12116.024888675092</nm:col>
+</nm:row>
+</nm:smatrix>
+<nm:eigenvalues>
+<nm:val nm:name='1'>7.56494076325143235E-006</nm:val>
+<nm:val nm:name='2'>1.09431651572770920E-004</nm:val>
+<nm:val nm:name='3'>2.06703970648599721E-004</nm:val>
+<nm:val nm:name='4'>7.56002194462085408E-004</nm:val>
+<nm:val nm:name='5'>3.90038425585977023E-003</nm:val>
+<nm:val nm:name='6'>3.24396829337520731E-002</nm:val>
+<nm:val nm:name='7'>5.81579531839350530E-002</nm:val>
+<nm:val nm:name='8'>0.19724296589424464</nm:val>
+<nm:val nm:name='9'>0.88668370818309616</nm:val>
+<nm:val nm:name='10'>2.2163236558649588</nm:val>
+<nm:val nm:name='11'>7.6041719469267051</nm:val>
+</nm:eigenvalues>
+</nm:estimation>
+<nm:table nm:number='1'>
+<nm:row nm:rname='1'>
+<nm:col nm:cname='LINE NO.'>1.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>1.0000000000000000</nm:col>
+<nm:col nm:cname='ETA1'>-1.5629310678346444</nm:col>
+<nm:col nm:cname='ETA2'>-0.73484814510034424</nm:col>
+<nm:col nm:cname='ETA3'>-2.2777348904736767</nm:col>
+</nm:row>
+<nm:row nm:rname='2'>
+<nm:col nm:cname='LINE NO.'>2.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>2.0000000000000000</nm:col>
+<nm:col nm:cname='ETA1'>-1.5079057878704154</nm:col>
+<nm:col nm:cname='ETA2'>-0.65035899936338615</nm:col>
+<nm:col nm:cname='ETA3'>-1.6225152844752793</nm:col>
+</nm:row>
+<nm:row nm:rname='3'>
+<nm:col nm:cname='LINE NO.'>3.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>3.0000000000000000</nm:col>
+<nm:col nm:cname='ETA1'>-1.4434600036508360</nm:col>
+<nm:col nm:cname='ETA2'>-0.63914835796942659</nm:col>
+<nm:col nm:cname='ETA3'>-1.7416564273785413</nm:col>
+</nm:row>
+<nm:row nm:rname='4'>
+<nm:col nm:cname='LINE NO.'>4.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>4.0000000000000000</nm:col>
+<nm:col nm:cname='ETA1'>-1.9027469646240431</nm:col>
+<nm:col nm:cname='ETA2'>-0.67807904598783331</nm:col>
+<nm:col nm:cname='ETA3'>-1.7846882162604805</nm:col>
+</nm:row>
+<nm:row nm:rname='5'>
+<nm:col nm:cname='LINE NO.'>5.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>5.0000000000000000</nm:col>
+<nm:col nm:cname='ETA1'>-1.7320414574858720</nm:col>
+<nm:col nm:cname='ETA2'>-0.80680040982451506</nm:col>
+<nm:col nm:cname='ETA3'>-1.7970002513074186</nm:col>
+</nm:row>
+<nm:row nm:rname='6'>
+<nm:col nm:cname='LINE NO.'>6.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>6.0000000000000000</nm:col>
+<nm:col nm:cname='ETA1'>-1.7045020676565099</nm:col>
+<nm:col nm:cname='ETA2'>-0.41255163650700477</nm:col>
+<nm:col nm:cname='ETA3'>-1.6407036133493762</nm:col>
+</nm:row>
+<nm:row nm:rname='7'>
+<nm:col nm:cname='LINE NO.'>7.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>7.0000000000000000</nm:col>
+<nm:col nm:cname='ETA1'>-2.3611620049007080</nm:col>
+<nm:col nm:cname='ETA2'>-0.62870908505329670</nm:col>
+<nm:col nm:cname='ETA3'>-1.6315312544944451</nm:col>
+</nm:row>
+<nm:row nm:rname='8'>
+<nm:col nm:cname='LINE NO.'>8.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>8.0000000000000000</nm:col>
+<nm:col nm:cname='ETA1'>-1.7137574783536045</nm:col>
+<nm:col nm:cname='ETA2'>-0.55497538676679148</nm:col>
+<nm:col nm:cname='ETA3'>-1.7072991980633445</nm:col>
+</nm:row>
+<nm:row nm:rname='9'>
+<nm:col nm:cname='LINE NO.'>9.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>9.0000000000000000</nm:col>
+<nm:col nm:cname='ETA1'>-0.60641001321610077</nm:col>
+<nm:col nm:cname='ETA2'>-0.47114704651868711</nm:col>
+<nm:col nm:cname='ETA3'>-1.7563244944032625</nm:col>
+</nm:row>
+<nm:row nm:rname='10'>
+<nm:col nm:cname='LINE NO.'>10.000000000000000</nm:col>
+<nm:col nm:cname='ID'>10.000000000000000</nm:col>
+<nm:col nm:cname='ETA1'>-2.5510436181974474</nm:col>
+<nm:col nm:cname='ETA2'>-0.91187757552717574</nm:col>
+<nm:col nm:cname='ETA3'>-1.8846179956622457</nm:col>
+</nm:row>
+<nm:row nm:rname='11'>
+<nm:col nm:cname='LINE NO.'>11.000000000000000</nm:col>
+<nm:col nm:cname='ID'>11.000000000000000</nm:col>
+<nm:col nm:cname='ETA1'>-0.98298958816746729</nm:col>
+<nm:col nm:cname='ETA2'>-0.50640843986589323</nm:col>
+<nm:col nm:cname='ETA3'>-1.6108823597705173</nm:col>
+</nm:row>
+<nm:row nm:rname='12'>
+<nm:col nm:cname='LINE NO.'>12.000000000000000</nm:col>
+<nm:col nm:cname='ID'>12.000000000000000</nm:col>
+<nm:col nm:cname='ETA1'>-2.2242138388681179</nm:col>
+<nm:col nm:cname='ETA2'>-0.91023397043298893</nm:col>
+<nm:col nm:cname='ETA3'>-1.6290716970135788</nm:col>
+</nm:row>
+</nm:table>
+<nm:table nm:number='2'>
+<nm:row nm:rname='1'>
+<nm:col nm:cname='LINE NO.'>1.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>1.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>4.0199999999999996</nm:col>
+<nm:col nm:cname='TIME'>0.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>79.599999999999994</nm:col>
+<nm:col nm:cname='DV'>0.73999999999999999</nm:col>
+<nm:col nm:cname='PRED'>0.0000000000000000</nm:col>
+<nm:col nm:cname='RES'>0.73999999999999999</nm:col>
+<nm:col nm:cname='WRES'>3.4066986289300587</nm:col>
+</nm:row>
+<nm:row nm:rname='2'>
+<nm:col nm:cname='LINE NO.'>2.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>1.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.25000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>2.8399999999999999</nm:col>
+<nm:col nm:cname='PRED'>4.1636451848581082</nm:col>
+<nm:col nm:cname='RES'>-1.3236451848581083</nm:col>
+<nm:col nm:cname='WRES'>-2.9608610777084396</nm:col>
+</nm:row>
+<nm:row nm:rname='3'>
+<nm:col nm:cname='LINE NO.'>3.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>1.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.56999999999999995</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>6.5700000000000003</nm:col>
+<nm:col nm:cname='PRED'>3.9788223852074935</nm:col>
+<nm:col nm:cname='RES'>2.5911776147925067</nm:col>
+<nm:col nm:cname='WRES'>-3.3594065988409749</nm:col>
+</nm:row>
+<nm:row nm:rname='4'>
+<nm:col nm:cname='LINE NO.'>4.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>1.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>1.1200000000000001</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>10.500000000000000</nm:col>
+<nm:col nm:cname='PRED'>3.0809261124268126</nm:col>
+<nm:col nm:cname='RES'>7.4190738875731874</nm:col>
+<nm:col nm:cname='WRES'>-1.2991555735766589</nm:col>
+</nm:row>
+<nm:row nm:rname='5'>
+<nm:col nm:cname='LINE NO.'>5.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>1.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>2.0200000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>9.6600000000000001</nm:col>
+<nm:col nm:cname='PRED'>2.0073324974375768</nm:col>
+<nm:col nm:cname='RES'>7.6526675025624229</nm:col>
+<nm:col nm:cname='WRES'>-2.9195001426924709</nm:col>
+</nm:row>
+<nm:row nm:rname='6'>
+<nm:col nm:cname='LINE NO.'>6.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>1.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>3.8199999999999998</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>8.5800000000000001</nm:col>
+<nm:col nm:cname='PRED'>0.85203335553404624</nm:col>
+<nm:col nm:cname='RES'>7.7279666444659538</nm:col>
+<nm:col nm:cname='WRES'>-0.67241384469160292</nm:col>
+</nm:row>
+<nm:row nm:rname='7'>
+<nm:col nm:cname='LINE NO.'>7.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>1.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>5.0999999999999996</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>8.3599999999999994</nm:col>
+<nm:col nm:cname='PRED'>0.46324159483883304</nm:col>
+<nm:col nm:cname='RES'>7.8967584051611661</nm:col>
+<nm:col nm:cname='WRES'>7.6595456782079765</nm:col>
+</nm:row>
+<nm:row nm:rname='8'>
+<nm:col nm:cname='LINE NO.'>8.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>1.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>7.0300000000000002</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>7.4699999999999998</nm:col>
+<nm:col nm:cname='PRED'>0.18482742126536947</nm:col>
+<nm:col nm:cname='RES'>7.2851725787346302</nm:col>
+<nm:col nm:cname='WRES'>17.905511852379888</nm:col>
+</nm:row>
+<nm:row nm:rname='9'>
+<nm:col nm:cname='LINE NO.'>9.0000000000000000</nm:col>
+<nm:col nm:cname='ID'>1.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>9.0500000000000007</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>6.8899999999999997</nm:col>
+<nm:col nm:cname='PRED'>7.06508065439207245E-002</nm:col>
+<nm:col nm:cname='RES'>6.8193491934560786</nm:col>
+<nm:col nm:cname='WRES'>23.921781408207671</nm:col>
+</nm:row>
+<nm:row nm:rname='10'>
+<nm:col nm:cname='LINE NO.'>10.000000000000000</nm:col>
+<nm:col nm:cname='ID'>1.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>12.119999999999999</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>5.9400000000000004</nm:col>
+<nm:col nm:cname='PRED'>1.63822263083454600E-002</nm:col>
+<nm:col nm:cname='RES'>5.9236177736916549</nm:col>
+<nm:col nm:cname='WRES'>24.998548493452152</nm:col>
+</nm:row>
+<nm:row nm:rname='11'>
+<nm:col nm:cname='LINE NO.'>11.000000000000000</nm:col>
+<nm:col nm:cname='ID'>1.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>24.370000000000001</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>3.2799999999999998</nm:col>
+<nm:col nm:cname='PRED'>4.80395379021893011E-005</nm:col>
+<nm:col nm:cname='RES'>3.2799519604620975</nm:col>
+<nm:col nm:cname='WRES'>15.086555338340512</nm:col>
+</nm:row>
+<nm:row nm:rname='12'>
+<nm:col nm:cname='LINE NO.'>12.000000000000000</nm:col>
+<nm:col nm:cname='ID'>2.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>4.4000000000000004</nm:col>
+<nm:col nm:cname='TIME'>0.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>72.400000000000006</nm:col>
+<nm:col nm:cname='DV'>0.0000000000000000</nm:col>
+<nm:col nm:cname='PRED'>0.0000000000000000</nm:col>
+<nm:col nm:cname='RES'>0.0000000000000000</nm:col>
+<nm:col nm:cname='WRES'>0.0000000000000000</nm:col>
+</nm:row>
+<nm:row nm:rname='13'>
+<nm:col nm:cname='LINE NO.'>13.000000000000000</nm:col>
+<nm:col nm:cname='ID'>2.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.27000000000000002</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>1.7200000000000000</nm:col>
+<nm:col nm:cname='PRED'>4.2050470971184479</nm:col>
+<nm:col nm:cname='RES'>-2.4850470971184482</nm:col>
+<nm:col nm:cname='WRES'>-3.5661832097431510</nm:col>
+</nm:row>
+<nm:row nm:rname='14'>
+<nm:col nm:cname='LINE NO.'>14.000000000000000</nm:col>
+<nm:col nm:cname='ID'>2.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.52000000000000002</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>7.9100000000000001</nm:col>
+<nm:col nm:cname='PRED'>4.0605411683192676</nm:col>
+<nm:col nm:cname='RES'>3.8494588316807326</nm:col>
+<nm:col nm:cname='WRES'>-0.81674985822884205</nm:col>
+</nm:row>
+<nm:row nm:rname='15'>
+<nm:col nm:cname='LINE NO.'>15.000000000000000</nm:col>
+<nm:col nm:cname='ID'>2.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>1.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>8.3100000000000005</nm:col>
+<nm:col nm:cname='PRED'>3.2617809300598877</nm:col>
+<nm:col nm:cname='RES'>5.0482190699401128</nm:col>
+<nm:col nm:cname='WRES'>-1.2492944744794949</nm:col>
+</nm:row>
+<nm:row nm:rname='16'>
+<nm:col nm:cname='LINE NO.'>16.000000000000000</nm:col>
+<nm:col nm:cname='ID'>2.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>1.9199999999999999</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>8.3300000000000001</nm:col>
+<nm:col nm:cname='PRED'>2.1052080090821512</nm:col>
+<nm:col nm:cname='RES'>6.2247919909178488</nm:col>
+<nm:col nm:cname='WRES'>-1.2582732901830269</nm:col>
+</nm:row>
+<nm:row nm:rname='17'>
+<nm:col nm:cname='LINE NO.'>17.000000000000000</nm:col>
+<nm:col nm:cname='ID'>2.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>3.5000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>6.8499999999999996</nm:col>
+<nm:col nm:cname='PRED'>0.99224486288684033</nm:col>
+<nm:col nm:cname='RES'>5.8577551371131591</nm:col>
+<nm:col nm:cname='WRES'>-0.78661039262629473</nm:col>
+</nm:row>
+<nm:row nm:rname='18'>
+<nm:col nm:cname='LINE NO.'>18.000000000000000</nm:col>
+<nm:col nm:cname='ID'>2.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>5.0199999999999996</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>6.0800000000000001</nm:col>
+<nm:col nm:cname='PRED'>0.48122492520167320</nm:col>
+<nm:col nm:cname='RES'>5.5987750747983265</nm:col>
+<nm:col nm:cname='WRES'>4.6544722221051025</nm:col>
+</nm:row>
+<nm:row nm:rname='19'>
+<nm:col nm:cname='LINE NO.'>19.000000000000000</nm:col>
+<nm:col nm:cname='ID'>2.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>7.0300000000000002</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>5.4000000000000004</nm:col>
+<nm:col nm:cname='PRED'>0.18482742126536947</nm:col>
+<nm:col nm:cname='RES'>5.2151725787346308</nm:col>
+<nm:col nm:cname='WRES'>12.727410083395219</nm:col>
+</nm:row>
+<nm:row nm:rname='20'>
+<nm:col nm:cname='LINE NO.'>20.000000000000000</nm:col>
+<nm:col nm:cname='ID'>2.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>9.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>4.5499999999999998</nm:col>
+<nm:col nm:cname='PRED'>7.23527391742817272E-002</nm:col>
+<nm:col nm:cname='RES'>4.4776472608257185</nm:col>
+<nm:col nm:cname='WRES'>15.135174352608752</nm:col>
+</nm:row>
+<nm:row nm:rname='21'>
+<nm:col nm:cname='LINE NO.'>21.000000000000000</nm:col>
+<nm:col nm:cname='ID'>2.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>12.000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>3.0099999999999998</nm:col>
+<nm:col nm:cname='PRED'>1.73453780301758981E-002</nm:col>
+<nm:col nm:cname='RES'>2.9926546219698240</nm:col>
+<nm:col nm:cname='WRES'>12.063478459654826</nm:col>
+</nm:row>
+<nm:row nm:rname='22'>
+<nm:col nm:cname='LINE NO.'>22.000000000000000</nm:col>
+<nm:col nm:cname='ID'>2.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>24.300000000000001</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>0.90000000000000002</nm:col>
+<nm:col nm:cname='PRED'>4.96674446054174549E-005</nm:col>
+<nm:col nm:cname='RES'>0.89995033255539458</nm:col>
+<nm:col nm:cname='WRES'>4.1332844566820803</nm:col>
+</nm:row>
+<nm:row nm:rname='23'>
+<nm:col nm:cname='LINE NO.'>23.000000000000000</nm:col>
+<nm:col nm:cname='ID'>3.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>4.5300000000000002</nm:col>
+<nm:col nm:cname='TIME'>0.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>70.500000000000000</nm:col>
+<nm:col nm:cname='DV'>0.0000000000000000</nm:col>
+<nm:col nm:cname='PRED'>0.0000000000000000</nm:col>
+<nm:col nm:cname='RES'>0.0000000000000000</nm:col>
+<nm:col nm:cname='WRES'>0.0000000000000000</nm:col>
+</nm:row>
+<nm:row nm:rname='24'>
+<nm:col nm:cname='LINE NO.'>24.000000000000000</nm:col>
+<nm:col nm:cname='ID'>3.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.27000000000000002</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>4.4000000000000004</nm:col>
+<nm:col nm:cname='PRED'>4.2050470971184479</nm:col>
+<nm:col nm:cname='RES'>0.19495290288155243</nm:col>
+<nm:col nm:cname='WRES'>-1.6501317980617594</nm:col>
+</nm:row>
+<nm:row nm:rname='25'>
+<nm:col nm:cname='LINE NO.'>25.000000000000000</nm:col>
+<nm:col nm:cname='ID'>3.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.57999999999999996</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>6.9000000000000004</nm:col>
+<nm:col nm:cname='PRED'>3.9620084201893162</nm:col>
+<nm:col nm:cname='RES'>2.9379915798106842</nm:col>
+<nm:col nm:cname='WRES'>-1.8739516987348814</nm:col>
+</nm:row>
+<nm:row nm:rname='26'>
+<nm:col nm:cname='LINE NO.'>26.000000000000000</nm:col>
+<nm:col nm:cname='ID'>3.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>1.0200000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>8.1999999999999993</nm:col>
+<nm:col nm:cname='PRED'>3.2309403617408274</nm:col>
+<nm:col nm:cname='RES'>4.9690596382591714</nm:col>
+<nm:col nm:cname='WRES'>-1.4716568030602259</nm:col>
+</nm:row>
+<nm:row nm:rname='27'>
+<nm:col nm:cname='LINE NO.'>27.000000000000000</nm:col>
+<nm:col nm:cname='ID'>3.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>2.0200000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>7.7999999999999998</nm:col>
+<nm:col nm:cname='PRED'>2.0073324974375768</nm:col>
+<nm:col nm:cname='RES'>5.7926675025624235</nm:col>
+<nm:col nm:cname='WRES'>-2.2404111855064506</nm:col>
+</nm:row>
+<nm:row nm:rname='28'>
+<nm:col nm:cname='LINE NO.'>28.000000000000000</nm:col>
+<nm:col nm:cname='ID'>3.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>3.6200000000000001</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>7.5000000000000000</nm:col>
+<nm:col nm:cname='PRED'>0.93714762911632254</nm:col>
+<nm:col nm:cname='RES'>6.5628523708836770</nm:col>
+<nm:col nm:cname='WRES'>0.94737633253991804</nm:col>
+</nm:row>
+<nm:row nm:rname='29'>
+<nm:col nm:cname='LINE NO.'>29.000000000000000</nm:col>
+<nm:col nm:cname='ID'>3.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>5.0800000000000001</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>6.2000000000000002</nm:col>
+<nm:col nm:cname='PRED'>0.46767342196590606</nm:col>
+<nm:col nm:cname='RES'>5.7323265780340940</nm:col>
+<nm:col nm:cname='WRES'>4.8880415916394613</nm:col>
+</nm:row>
+<nm:row nm:rname='30'>
+<nm:col nm:cname='LINE NO.'>30.000000000000000</nm:col>
+<nm:col nm:cname='ID'>3.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>7.0700000000000003</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>5.2999999999999998</nm:col>
+<nm:col nm:cname='PRED'>0.18134104807927817</nm:col>
+<nm:col nm:cname='RES'>5.1186589519207217</nm:col>
+<nm:col nm:cname='WRES'>12.061567886483667</nm:col>
+</nm:row>
+<nm:row nm:rname='31'>
+<nm:col nm:cname='LINE NO.'>31.000000000000000</nm:col>
+<nm:col nm:cname='ID'>3.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>9.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>4.9000000000000004</nm:col>
+<nm:col nm:cname='PRED'>7.23527391742817272E-002</nm:col>
+<nm:col nm:cname='RES'>4.8276472608257190</nm:col>
+<nm:col nm:cname='WRES'>16.530322169107976</nm:col>
+</nm:row>
+<nm:row nm:rname='32'>
+<nm:col nm:cname='LINE NO.'>32.000000000000000</nm:col>
+<nm:col nm:cname='ID'>3.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>12.150000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>3.7000000000000002</nm:col>
+<nm:col nm:cname='PRED'>1.61499138142417523E-002</nm:col>
+<nm:col nm:cname='RES'>3.6838500861857586</nm:col>
+<nm:col nm:cname='WRES'>15.280168595539772</nm:col>
+</nm:row>
+<nm:row nm:rname='33'>
+<nm:col nm:cname='LINE NO.'>33.000000000000000</nm:col>
+<nm:col nm:cname='ID'>3.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>24.170000000000002</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>1.0500000000000000</nm:col>
+<nm:col nm:cname='PRED'>5.28384701801522225E-005</nm:col>
+<nm:col nm:cname='RES'>1.0499471615298199</nm:col>
+<nm:col nm:cname='WRES'>4.8228299157019237</nm:col>
+</nm:row>
+<nm:row nm:rname='34'>
+<nm:col nm:cname='LINE NO.'>34.000000000000000</nm:col>
+<nm:col nm:cname='ID'>4.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>4.4000000000000004</nm:col>
+<nm:col nm:cname='TIME'>0.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>72.700000000000003</nm:col>
+<nm:col nm:cname='DV'>0.0000000000000000</nm:col>
+<nm:col nm:cname='PRED'>0.0000000000000000</nm:col>
+<nm:col nm:cname='RES'>0.0000000000000000</nm:col>
+<nm:col nm:cname='WRES'>0.0000000000000000</nm:col>
+</nm:row>
+<nm:row nm:rname='35'>
+<nm:col nm:cname='LINE NO.'>35.000000000000000</nm:col>
+<nm:col nm:cname='ID'>4.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.34999999999999998</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>1.8899999999999999</nm:col>
+<nm:col nm:cname='PRED'>4.2509964100982103</nm:col>
+<nm:col nm:cname='RES'>-2.3609964100982106</nm:col>
+<nm:col nm:cname='WRES'>-4.1472866796052994</nm:col>
+</nm:row>
+<nm:row nm:rname='36'>
+<nm:col nm:cname='LINE NO.'>36.000000000000000</nm:col>
+<nm:col nm:cname='ID'>4.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.59999999999999998</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>4.5999999999999996</nm:col>
+<nm:col nm:cname='PRED'>3.9280756153269603</nm:col>
+<nm:col nm:cname='RES'>0.67192438467303939</nm:col>
+<nm:col nm:cname='WRES'>-3.4334032691585890</nm:col>
+</nm:row>
+<nm:row nm:rname='37'>
+<nm:col nm:cname='LINE NO.'>37.000000000000000</nm:col>
+<nm:col nm:cname='ID'>4.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>1.0700000000000001</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>8.5999999999999996</nm:col>
+<nm:col nm:cname='PRED'>3.1550641711667242</nm:col>
+<nm:col nm:cname='RES'>5.4449358288332750</nm:col>
+<nm:col nm:cname='WRES'>-0.75142775592221400</nm:col>
+</nm:row>
+<nm:row nm:rname='38'>
+<nm:col nm:cname='LINE NO.'>38.000000000000000</nm:col>
+<nm:col nm:cname='ID'>4.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>2.1299999999999999</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>8.3800000000000008</nm:col>
+<nm:col nm:cname='PRED'>1.9049169310246119</nm:col>
+<nm:col nm:cname='RES'>6.4750830689753887</nm:col>
+<nm:col nm:cname='WRES'>-1.0638814688442724</nm:col>
+</nm:row>
+<nm:row nm:rname='39'>
+<nm:col nm:cname='LINE NO.'>39.000000000000000</nm:col>
+<nm:col nm:cname='ID'>4.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>3.5000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>7.5400000000000000</nm:col>
+<nm:col nm:cname='PRED'>0.99224486288684033</nm:col>
+<nm:col nm:cname='RES'>6.5477551371131595</nm:col>
+<nm:col nm:cname='WRES'>0.34206236174837351</nm:col>
+</nm:row>
+<nm:row nm:rname='40'>
+<nm:col nm:cname='LINE NO.'>40.000000000000000</nm:col>
+<nm:col nm:cname='ID'>4.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>5.0199999999999996</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>6.8799999999999999</nm:col>
+<nm:col nm:cname='PRED'>0.48122492520167320</nm:col>
+<nm:col nm:cname='RES'>6.3987750747983263</nm:col>
+<nm:col nm:cname='WRES'>6.6477724595657239</nm:col>
+</nm:row>
+<nm:row nm:rname='41'>
+<nm:col nm:cname='LINE NO.'>41.000000000000000</nm:col>
+<nm:col nm:cname='ID'>4.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>7.0199999999999996</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>5.7800000000000002</nm:col>
+<nm:col nm:cname='PRED'>0.18570943765680031</nm:col>
+<nm:col nm:cname='RES'>5.5942905623431995</nm:col>
+<nm:col nm:cname='WRES'>13.600687397931651</nm:col>
+</nm:row>
+<nm:row nm:rname='42'>
+<nm:col nm:cname='LINE NO.'>42.000000000000000</nm:col>
+<nm:col nm:cname='ID'>4.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>9.0199999999999996</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>5.3300000000000001</nm:col>
+<nm:col nm:cname='PRED'>7.16671008268154053E-002</nm:col>
+<nm:col nm:cname='RES'>5.2583328991731850</nm:col>
+<nm:col nm:cname='WRES'>18.334249385678671</nm:col>
+</nm:row>
+<nm:row nm:rname='43'>
+<nm:col nm:cname='LINE NO.'>43.000000000000000</nm:col>
+<nm:col nm:cname='ID'>4.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>11.980000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>4.1900000000000004</nm:col>
+<nm:col nm:cname='PRED'>1.75113210666819827E-002</nm:col>
+<nm:col nm:cname='RES'>4.1724886789333180</nm:col>
+<nm:col nm:cname='WRES'>17.338519992842642</nm:col>
+</nm:row>
+<nm:row nm:rname='44'>
+<nm:col nm:cname='LINE NO.'>44.000000000000000</nm:col>
+<nm:col nm:cname='ID'>4.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>24.649999999999999</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>1.1499999999999999</nm:col>
+<nm:col nm:cname='PRED'>4.20442724608485597E-005</nm:col>
+<nm:col nm:cname='RES'>1.1499579557275390</nm:col>
+<nm:col nm:cname='WRES'>5.2848782283190801</nm:col>
+</nm:row>
+<nm:row nm:rname='45'>
+<nm:col nm:cname='LINE NO.'>45.000000000000000</nm:col>
+<nm:col nm:cname='ID'>5.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>5.8600000000000003</nm:col>
+<nm:col nm:cname='TIME'>0.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>54.600000000000001</nm:col>
+<nm:col nm:cname='DV'>0.0000000000000000</nm:col>
+<nm:col nm:cname='PRED'>0.0000000000000000</nm:col>
+<nm:col nm:cname='RES'>0.0000000000000000</nm:col>
+<nm:col nm:cname='WRES'>0.0000000000000000</nm:col>
+</nm:row>
+<nm:row nm:rname='46'>
+<nm:col nm:cname='LINE NO.'>46.000000000000000</nm:col>
+<nm:col nm:cname='ID'>5.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.29999999999999999</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>2.0200000000000000</nm:col>
+<nm:col nm:cname='PRED'>4.2411879678987878</nm:col>
+<nm:col nm:cname='RES'>-2.2211879678987878</nm:col>
+<nm:col nm:cname='WRES'>-4.1799663936375264</nm:col>
+</nm:row>
+<nm:row nm:rname='47'>
+<nm:col nm:cname='LINE NO.'>47.000000000000000</nm:col>
+<nm:col nm:cname='ID'>5.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.52000000000000002</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>5.6299999999999999</nm:col>
+<nm:col nm:cname='PRED'>4.0605411683192676</nm:col>
+<nm:col nm:cname='RES'>1.5694588316807323</nm:col>
+<nm:col nm:cname='WRES'>-3.4501971719734854</nm:col>
+</nm:row>
+<nm:row nm:rname='48'>
+<nm:col nm:cname='LINE NO.'>48.000000000000000</nm:col>
+<nm:col nm:cname='ID'>5.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>1.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>11.400000000000000</nm:col>
+<nm:col nm:cname='PRED'>3.2617809300598877</nm:col>
+<nm:col nm:cname='RES'>8.1382190699401136</nm:col>
+<nm:col nm:cname='WRES'>0.31130713773129315</nm:col>
+</nm:row>
+<nm:row nm:rname='49'>
+<nm:col nm:cname='LINE NO.'>49.000000000000000</nm:col>
+<nm:col nm:cname='ID'>5.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>2.0200000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>9.3300000000000001</nm:col>
+<nm:col nm:cname='PRED'>2.0073324974375768</nm:col>
+<nm:col nm:cname='RES'>7.3226675025624228</nm:col>
+<nm:col nm:cname='WRES'>-2.3690668624925388</nm:col>
+</nm:row>
+<nm:row nm:rname='50'>
+<nm:col nm:cname='LINE NO.'>50.000000000000000</nm:col>
+<nm:col nm:cname='ID'>5.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>3.5000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>8.7400000000000002</nm:col>
+<nm:col nm:cname='PRED'>0.99224486288684033</nm:col>
+<nm:col nm:cname='RES'>7.7477551371131597</nm:col>
+<nm:col nm:cname='WRES'>-0.12584535081903572</nm:col>
+</nm:row>
+<nm:row nm:rname='51'>
+<nm:col nm:cname='LINE NO.'>51.000000000000000</nm:col>
+<nm:col nm:cname='ID'>5.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>5.0199999999999996</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>7.5599999999999996</nm:col>
+<nm:col nm:cname='PRED'>0.48122492520167320</nm:col>
+<nm:col nm:cname='RES'>7.0787750747983260</nm:col>
+<nm:col nm:cname='WRES'>5.7242996343869565</nm:col>
+</nm:row>
+<nm:row nm:rname='52'>
+<nm:col nm:cname='LINE NO.'>52.000000000000000</nm:col>
+<nm:col nm:cname='ID'>5.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>7.0199999999999996</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>7.0899999999999999</nm:col>
+<nm:col nm:cname='PRED'>0.18570943765680031</nm:col>
+<nm:col nm:cname='RES'>6.9042905623431992</nm:col>
+<nm:col nm:cname='WRES'>17.280371603325065</nm:col>
+</nm:row>
+<nm:row nm:rname='53'>
+<nm:col nm:cname='LINE NO.'>53.000000000000000</nm:col>
+<nm:col nm:cname='ID'>5.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>9.0999999999999996</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>5.9000000000000004</nm:col>
+<nm:col nm:cname='PRED'>6.89889079842990749E-002</nm:col>
+<nm:col nm:cname='RES'>5.8310110920157010</nm:col>
+<nm:col nm:cname='WRES'>20.088961362052274</nm:col>
+</nm:row>
+<nm:row nm:rname='54'>
+<nm:col nm:cname='LINE NO.'>54.000000000000000</nm:col>
+<nm:col nm:cname='ID'>5.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>12.000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>4.3700000000000001</nm:col>
+<nm:col nm:cname='PRED'>1.73453780301758981E-002</nm:col>
+<nm:col nm:cname='RES'>4.3526546219698243</nm:col>
+<nm:col nm:cname='WRES'>17.841912972050245</nm:col>
+</nm:row>
+<nm:row nm:rname='55'>
+<nm:col nm:cname='LINE NO.'>55.000000000000000</nm:col>
+<nm:col nm:cname='ID'>5.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>24.350000000000001</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>1.5700000000000001</nm:col>
+<nm:col nm:cname='PRED'>4.84991316209291802E-005</nm:col>
+<nm:col nm:cname='RES'>1.5699515008683791</nm:col>
+<nm:col nm:cname='WRES'>7.2152357384663421</nm:col>
+</nm:row>
+<nm:row nm:rname='56'>
+<nm:col nm:cname='LINE NO.'>56.000000000000000</nm:col>
+<nm:col nm:cname='ID'>6.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>4.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>80.000000000000000</nm:col>
+<nm:col nm:cname='DV'>0.0000000000000000</nm:col>
+<nm:col nm:cname='PRED'>0.0000000000000000</nm:col>
+<nm:col nm:cname='RES'>0.0000000000000000</nm:col>
+<nm:col nm:cname='WRES'>0.0000000000000000</nm:col>
+</nm:row>
+<nm:row nm:rname='57'>
+<nm:col nm:cname='LINE NO.'>57.000000000000000</nm:col>
+<nm:col nm:cname='ID'>6.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.27000000000000002</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>1.2900000000000000</nm:col>
+<nm:col nm:cname='PRED'>4.2050470971184479</nm:col>
+<nm:col nm:cname='RES'>-2.9150470971184479</nm:col>
+<nm:col nm:cname='WRES'>-3.1770078017620089</nm:col>
+</nm:row>
+<nm:row nm:rname='58'>
+<nm:col nm:cname='LINE NO.'>58.000000000000000</nm:col>
+<nm:col nm:cname='ID'>6.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.57999999999999996</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>3.0800000000000001</nm:col>
+<nm:col nm:cname='PRED'>3.9620084201893162</nm:col>
+<nm:col nm:cname='RES'>-0.88200842018931613</nm:col>
+<nm:col nm:cname='WRES'>-3.2270609082667128</nm:col>
+</nm:row>
+<nm:row nm:rname='59'>
+<nm:col nm:cname='LINE NO.'>59.000000000000000</nm:col>
+<nm:col nm:cname='ID'>6.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>1.1499999999999999</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>6.4400000000000004</nm:col>
+<nm:col nm:cname='PRED'>3.0372681532276564</nm:col>
+<nm:col nm:cname='RES'>3.4027318467723440</nm:col>
+<nm:col nm:cname='WRES'>-0.80567338824970125</nm:col>
+</nm:row>
+<nm:row nm:rname='60'>
+<nm:col nm:cname='LINE NO.'>60.000000000000000</nm:col>
+<nm:col nm:cname='ID'>6.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>2.0299999999999998</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>6.3200000000000003</nm:col>
+<nm:col nm:cname='PRED'>1.9977987885689885</nm:col>
+<nm:col nm:cname='RES'>4.3222012114310120</nm:col>
+<nm:col nm:cname='WRES'>-0.64951017337865746</nm:col>
+</nm:row>
+<nm:row nm:rname='61'>
+<nm:col nm:cname='LINE NO.'>61.000000000000000</nm:col>
+<nm:col nm:cname='ID'>6.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>3.5699999999999998</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>5.5300000000000002</nm:col>
+<nm:col nm:cname='PRED'>0.95972291462939996</nm:col>
+<nm:col nm:cname='RES'>4.5702770853706003</nm:col>
+<nm:col nm:cname='WRES'>0.81146272593466218</nm:col>
+</nm:row>
+<nm:row nm:rname='62'>
+<nm:col nm:cname='LINE NO.'>62.000000000000000</nm:col>
+<nm:col nm:cname='ID'>6.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>5.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>4.9400000000000004</nm:col>
+<nm:col nm:cname='PRED'>0.48582879864804290</nm:col>
+<nm:col nm:cname='RES'>4.4541712013519579</nm:col>
+<nm:col nm:cname='WRES'>4.9130450281554578</nm:col>
+</nm:row>
+<nm:row nm:rname='63'>
+<nm:col nm:cname='LINE NO.'>63.000000000000000</nm:col>
+<nm:col nm:cname='ID'>6.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>7.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>4.0199999999999996</nm:col>
+<nm:col nm:cname='PRED'>0.18748611775791960</nm:col>
+<nm:col nm:cname='RES'>3.8325138822420799</nm:col>
+<nm:col nm:cname='WRES'>9.3538473116580487</nm:col>
+</nm:row>
+<nm:row nm:rname='64'>
+<nm:col nm:cname='LINE NO.'>64.000000000000000</nm:col>
+<nm:col nm:cname='ID'>6.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>9.2200000000000006</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>3.4600000000000000</nm:col>
+<nm:col nm:cname='PRED'>6.51581015644745326E-002</nm:col>
+<nm:col nm:cname='RES'>3.3948418984355255</nm:col>
+<nm:col nm:cname='WRES'>11.942239161091434</nm:col>
+</nm:row>
+<nm:row nm:rname='65'>
+<nm:col nm:cname='LINE NO.'>65.000000000000000</nm:col>
+<nm:col nm:cname='ID'>6.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>12.100000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>2.7799999999999998</nm:col>
+<nm:col nm:cname='PRED'>1.65389548831627389E-002</nm:col>
+<nm:col nm:cname='RES'>2.7634610451168369</nm:col>
+<nm:col nm:cname='WRES'>11.513873503639511</nm:col>
+</nm:row>
+<nm:row nm:rname='66'>
+<nm:col nm:cname='LINE NO.'>66.000000000000000</nm:col>
+<nm:col nm:cname='ID'>6.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>23.850000000000001</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>0.92000000000000004</nm:col>
+<nm:col nm:cname='PRED'>6.15336245447750224E-005</nm:col>
+<nm:col nm:cname='RES'>0.91993846637545529</nm:col>
+<nm:col nm:cname='WRES'>4.2263129788164315</nm:col>
+</nm:row>
+<nm:row nm:rname='67'>
+<nm:col nm:cname='LINE NO.'>67.000000000000000</nm:col>
+<nm:col nm:cname='ID'>7.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>4.9500000000000002</nm:col>
+<nm:col nm:cname='TIME'>0.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>64.599999999999994</nm:col>
+<nm:col nm:cname='DV'>0.14999999999999999</nm:col>
+<nm:col nm:cname='PRED'>0.0000000000000000</nm:col>
+<nm:col nm:cname='RES'>0.14999999999999999</nm:col>
+<nm:col nm:cname='WRES'>0.69054701937771457</nm:col>
+</nm:row>
+<nm:row nm:rname='68'>
+<nm:col nm:cname='LINE NO.'>68.000000000000000</nm:col>
+<nm:col nm:cname='ID'>7.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.25000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>0.84999999999999998</nm:col>
+<nm:col nm:cname='PRED'>4.1636451848581082</nm:col>
+<nm:col nm:cname='RES'>-3.3136451848581081</nm:col>
+<nm:col nm:cname='WRES'>-3.4478614568300192</nm:col>
+</nm:row>
+<nm:row nm:rname='69'>
+<nm:col nm:cname='LINE NO.'>69.000000000000000</nm:col>
+<nm:col nm:cname='ID'>7.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.50000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>2.3500000000000001</nm:col>
+<nm:col nm:cname='PRED'>4.0916402382656321</nm:col>
+<nm:col nm:cname='RES'>-1.7416402382656320</nm:col>
+<nm:col nm:cname='WRES'>-3.8960837911809847</nm:col>
+</nm:row>
+<nm:row nm:rname='70'>
+<nm:col nm:cname='LINE NO.'>70.000000000000000</nm:col>
+<nm:col nm:cname='ID'>7.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>1.0200000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>5.0199999999999996</nm:col>
+<nm:col nm:cname='PRED'>3.2309403617408274</nm:col>
+<nm:col nm:cname='RES'>1.7890596382591721</nm:col>
+<nm:col nm:cname='WRES'>-2.8825784049212562</nm:col>
+</nm:row>
+<nm:row nm:rname='71'>
+<nm:col nm:cname='LINE NO.'>71.000000000000000</nm:col>
+<nm:col nm:cname='ID'>7.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>2.0200000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>6.5800000000000001</nm:col>
+<nm:col nm:cname='PRED'>2.0073324974375768</nm:col>
+<nm:col nm:cname='RES'>4.5726675025624228</nm:col>
+<nm:col nm:cname='WRES'>-1.8648971361449482</nm:col>
+</nm:row>
+<nm:row nm:rname='72'>
+<nm:col nm:cname='LINE NO.'>72.000000000000000</nm:col>
+<nm:col nm:cname='ID'>7.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>3.4800000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>7.0899999999999999</nm:col>
+<nm:col nm:cname='PRED'>1.0017376583288573</nm:col>
+<nm:col nm:cname='RES'>6.0882623416711423</nm:col>
+<nm:col nm:cname='WRES'>1.7069465652970721</nm:col>
+</nm:row>
+<nm:row nm:rname='73'>
+<nm:col nm:cname='LINE NO.'>73.000000000000000</nm:col>
+<nm:col nm:cname='ID'>7.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>5.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>6.6600000000000001</nm:col>
+<nm:col nm:cname='PRED'>0.48582879864804290</nm:col>
+<nm:col nm:cname='RES'>6.1741712013519576</nm:col>
+<nm:col nm:cname='WRES'>8.1469655388666684</nm:col>
+</nm:row>
+<nm:row nm:rname='74'>
+<nm:col nm:cname='LINE NO.'>74.000000000000000</nm:col>
+<nm:col nm:cname='ID'>7.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>6.9800000000000004</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>5.2500000000000000</nm:col>
+<nm:col nm:cname='PRED'>0.18927979533758141</nm:col>
+<nm:col nm:cname='RES'>5.0607202046624185</nm:col>
+<nm:col nm:cname='WRES'>12.568875256453577</nm:col>
+</nm:row>
+<nm:row nm:rname='75'>
+<nm:col nm:cname='LINE NO.'>75.000000000000000</nm:col>
+<nm:col nm:cname='ID'>7.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>9.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>4.3899999999999997</nm:col>
+<nm:col nm:cname='PRED'>7.23527391742817272E-002</nm:col>
+<nm:col nm:cname='RES'>4.3176472608257184</nm:col>
+<nm:col nm:cname='WRES'>14.731293381110481</nm:col>
+</nm:row>
+<nm:row nm:rname='76'>
+<nm:col nm:cname='LINE NO.'>76.000000000000000</nm:col>
+<nm:col nm:cname='ID'>7.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>12.050000000000001</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>3.5299999999999998</nm:col>
+<nm:col nm:cname='PRED'>1.69373677019919802E-002</nm:col>
+<nm:col nm:cname='RES'>3.5130626322980079</nm:col>
+<nm:col nm:cname='WRES'>14.586129875157008</nm:col>
+</nm:row>
+<nm:row nm:rname='77'>
+<nm:col nm:cname='LINE NO.'>77.000000000000000</nm:col>
+<nm:col nm:cname='ID'>7.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>24.219999999999999</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>1.1499999999999999</nm:col>
+<nm:col nm:cname='PRED'>5.15955660750105796E-005</nm:col>
+<nm:col nm:cname='RES'>1.1499484044339250</nm:col>
+<nm:col nm:cname='WRES'>5.2843315855435593</nm:col>
+</nm:row>
+<nm:row nm:rname='78'>
+<nm:col nm:cname='LINE NO.'>78.000000000000000</nm:col>
+<nm:col nm:cname='ID'>8.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>4.5300000000000002</nm:col>
+<nm:col nm:cname='TIME'>0.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>70.500000000000000</nm:col>
+<nm:col nm:cname='DV'>0.0000000000000000</nm:col>
+<nm:col nm:cname='PRED'>0.0000000000000000</nm:col>
+<nm:col nm:cname='RES'>0.0000000000000000</nm:col>
+<nm:col nm:cname='WRES'>0.0000000000000000</nm:col>
+</nm:row>
+<nm:row nm:rname='79'>
+<nm:col nm:cname='LINE NO.'>79.000000000000000</nm:col>
+<nm:col nm:cname='ID'>8.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.25000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>3.0499999999999998</nm:col>
+<nm:col nm:cname='PRED'>4.1636451848581082</nm:col>
+<nm:col nm:cname='RES'>-1.1136451848581084</nm:col>
+<nm:col nm:cname='WRES'>-2.0197506938764769</nm:col>
+</nm:row>
+<nm:row nm:rname='80'>
+<nm:col nm:cname='LINE NO.'>80.000000000000000</nm:col>
+<nm:col nm:cname='ID'>8.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.52000000000000002</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>3.0499999999999998</nm:col>
+<nm:col nm:cname='PRED'>4.0605411683192676</nm:col>
+<nm:col nm:cname='RES'>-1.0105411683192678</nm:col>
+<nm:col nm:cname='WRES'>-3.8806983528429595</nm:col>
+</nm:row>
+<nm:row nm:rname='81'>
+<nm:col nm:cname='LINE NO.'>81.000000000000000</nm:col>
+<nm:col nm:cname='ID'>8.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.97999999999999998</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>7.3099999999999996</nm:col>
+<nm:col nm:cname='PRED'>3.2929020802464621</nm:col>
+<nm:col nm:cname='RES'>4.0170979197535370</nm:col>
+<nm:col nm:cname='WRES'>-1.1562026581836107</nm:col>
+</nm:row>
+<nm:row nm:rname='82'>
+<nm:col nm:cname='LINE NO.'>82.000000000000000</nm:col>
+<nm:col nm:cname='ID'>8.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>2.0200000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>7.5599999999999996</nm:col>
+<nm:col nm:cname='PRED'>2.0073324974375768</nm:col>
+<nm:col nm:cname='RES'>5.5526675025624233</nm:col>
+<nm:col nm:cname='WRES'>-0.88245565033988949</nm:col>
+</nm:row>
+<nm:row nm:rname='83'>
+<nm:col nm:cname='LINE NO.'>83.000000000000000</nm:col>
+<nm:col nm:cname='ID'>8.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>3.5299999999999998</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>6.5899999999999999</nm:col>
+<nm:col nm:cname='PRED'>0.97817407210907592</nm:col>
+<nm:col nm:cname='RES'>5.6118259278909237</nm:col>
+<nm:col nm:cname='WRES'>0.38002321338278400</nm:col>
+</nm:row>
+<nm:row nm:rname='84'>
+<nm:col nm:cname='LINE NO.'>84.000000000000000</nm:col>
+<nm:col nm:cname='ID'>8.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>5.0499999999999998</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>5.8799999999999999</nm:col>
+<nm:col nm:cname='PRED'>0.47440078784120243</nm:col>
+<nm:col nm:cname='RES'>5.4055992121587977</nm:col>
+<nm:col nm:cname='WRES'>5.6044209593327698</nm:col>
+</nm:row>
+<nm:row nm:rname='85'>
+<nm:col nm:cname='LINE NO.'>85.000000000000000</nm:col>
+<nm:col nm:cname='ID'>8.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>7.1500000000000004</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>4.7300000000000004</nm:col>
+<nm:col nm:cname='PRED'>0.17456435010465299</nm:col>
+<nm:col nm:cname='RES'>4.5554356498953474</nm:col>
+<nm:col nm:cname='WRES'>11.104291255705395</nm:col>
+</nm:row>
+<nm:row nm:rname='86'>
+<nm:col nm:cname='LINE NO.'>86.000000000000000</nm:col>
+<nm:col nm:cname='ID'>8.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>9.0700000000000003</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>4.5700000000000003</nm:col>
+<nm:col nm:cname='PRED'>6.99812962696896856E-002</nm:col>
+<nm:col nm:cname='RES'>4.5000187037303103</nm:col>
+<nm:col nm:cname='WRES'>15.811225220333954</nm:col>
+</nm:row>
+<nm:row nm:rname='87'>
+<nm:col nm:cname='LINE NO.'>87.000000000000000</nm:col>
+<nm:col nm:cname='ID'>8.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>12.100000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>3.0000000000000000</nm:col>
+<nm:col nm:cname='PRED'>1.65389548831627389E-002</nm:col>
+<nm:col nm:cname='RES'>2.9834610451168371</nm:col>
+<nm:col nm:cname='WRES'>12.219487236854583</nm:col>
+</nm:row>
+<nm:row nm:rname='88'>
+<nm:col nm:cname='LINE NO.'>88.000000000000000</nm:col>
+<nm:col nm:cname='ID'>8.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>24.120000000000001</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>1.2500000000000000</nm:col>
+<nm:col nm:cname='PRED'>5.41113150482720612E-005</nm:col>
+<nm:col nm:cname='RES'>1.2499458886849517</nm:col>
+<nm:col nm:cname='WRES'>5.7445552701247751</nm:col>
+</nm:row>
+<nm:row nm:rname='89'>
+<nm:col nm:cname='LINE NO.'>89.000000000000000</nm:col>
+<nm:col nm:cname='ID'>9.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>3.1000000000000001</nm:col>
+<nm:col nm:cname='TIME'>0.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>86.400000000000006</nm:col>
+<nm:col nm:cname='DV'>0.0000000000000000</nm:col>
+<nm:col nm:cname='PRED'>0.0000000000000000</nm:col>
+<nm:col nm:cname='RES'>0.0000000000000000</nm:col>
+<nm:col nm:cname='WRES'>0.0000000000000000</nm:col>
+</nm:row>
+<nm:row nm:rname='90'>
+<nm:col nm:cname='LINE NO.'>90.000000000000000</nm:col>
+<nm:col nm:cname='ID'>9.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.29999999999999999</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>7.3700000000000001</nm:col>
+<nm:col nm:cname='PRED'>4.2411879678987878</nm:col>
+<nm:col nm:cname='RES'>3.1288120321012123</nm:col>
+<nm:col nm:cname='WRES'>0.37734154070441200</nm:col>
+</nm:row>
+<nm:row nm:rname='91'>
+<nm:col nm:cname='LINE NO.'>91.000000000000000</nm:col>
+<nm:col nm:cname='ID'>9.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.63000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>9.0299999999999994</nm:col>
+<nm:col nm:cname='PRED'>3.8766512872164243</nm:col>
+<nm:col nm:cname='RES'>5.1533487127835755</nm:col>
+<nm:col nm:cname='WRES'>0.25688738242121251</nm:col>
+</nm:row>
+<nm:row nm:rname='92'>
+<nm:col nm:cname='LINE NO.'>92.000000000000000</nm:col>
+<nm:col nm:cname='ID'>9.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>1.0500000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>7.1399999999999997</nm:col>
+<nm:col nm:cname='PRED'>3.1852050499370468</nm:col>
+<nm:col nm:cname='RES'>3.9547949500629529</nm:col>
+<nm:col nm:cname='WRES'>-1.6822711551862344</nm:col>
+</nm:row>
+<nm:row nm:rname='93'>
+<nm:col nm:cname='LINE NO.'>93.000000000000000</nm:col>
+<nm:col nm:cname='ID'>9.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>2.0200000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>6.3300000000000001</nm:col>
+<nm:col nm:cname='PRED'>2.0073324974375768</nm:col>
+<nm:col nm:cname='RES'>4.3226675025624228</nm:col>
+<nm:col nm:cname='WRES'>-2.7533097095442902</nm:col>
+</nm:row>
+<nm:row nm:rname='94'>
+<nm:col nm:cname='LINE NO.'>94.000000000000000</nm:col>
+<nm:col nm:cname='ID'>9.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>3.5299999999999998</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>5.6600000000000001</nm:col>
+<nm:col nm:cname='PRED'>0.97817407210907592</nm:col>
+<nm:col nm:cname='RES'>4.6818259278909240</nm:col>
+<nm:col nm:cname='WRES'>-1.4625522106596127</nm:col>
+</nm:row>
+<nm:row nm:rname='95'>
+<nm:col nm:cname='LINE NO.'>95.000000000000000</nm:col>
+<nm:col nm:cname='ID'>9.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>5.0199999999999996</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>5.6699999999999999</nm:col>
+<nm:col nm:cname='PRED'>0.48122492520167320</nm:col>
+<nm:col nm:cname='RES'>5.1887750747983263</nm:col>
+<nm:col nm:cname='WRES'>5.5871864894924670</nm:col>
+</nm:row>
+<nm:row nm:rname='96'>
+<nm:col nm:cname='LINE NO.'>96.000000000000000</nm:col>
+<nm:col nm:cname='ID'>9.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>7.1699999999999999</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>4.2400000000000002</nm:col>
+<nm:col nm:cname='PRED'>0.17291012092275590</nm:col>
+<nm:col nm:cname='RES'>4.0670898790772441</nm:col>
+<nm:col nm:cname='WRES'>9.6571343229989743</nm:col>
+</nm:row>
+<nm:row nm:rname='97'>
+<nm:col nm:cname='LINE NO.'>97.000000000000000</nm:col>
+<nm:col nm:cname='ID'>9.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>8.8000000000000007</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>4.1100000000000003</nm:col>
+<nm:col nm:cname='PRED'>7.95804501512157730E-002</nm:col>
+<nm:col nm:cname='RES'>4.0304195498487845</nm:col>
+<nm:col nm:cname='WRES'>13.541716574900731</nm:col>
+</nm:row>
+<nm:row nm:rname='98'>
+<nm:col nm:cname='LINE NO.'>98.000000000000000</nm:col>
+<nm:col nm:cname='ID'>9.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>11.600000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>3.1600000000000001</nm:col>
+<nm:col nm:cname='PRED'>2.09839188069984584E-002</nm:col>
+<nm:col nm:cname='RES'>3.1390160811930015</nm:col>
+<nm:col nm:cname='WRES'>12.748940443472009</nm:col>
+</nm:row>
+<nm:row nm:rname='99'>
+<nm:col nm:cname='LINE NO.'>99.000000000000000</nm:col>
+<nm:col nm:cname='ID'>9.0000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>24.430000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>1.1200000000000001</nm:col>
+<nm:col nm:cname='PRED'>4.66867236167417221E-005</nm:col>
+<nm:col nm:cname='RES'>1.1199533132763833</nm:col>
+<nm:col nm:cname='WRES'>5.1480541982417707</nm:col>
+</nm:row>
+<nm:row nm:rname='100'>
+<nm:col nm:cname='LINE NO.'>100.00000000000000</nm:col>
+<nm:col nm:cname='ID'>10.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>5.5000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>58.200000000000003</nm:col>
+<nm:col nm:cname='DV'>0.23999999999999999</nm:col>
+<nm:col nm:cname='PRED'>0.0000000000000000</nm:col>
+<nm:col nm:cname='RES'>0.23999999999999999</nm:col>
+<nm:col nm:cname='WRES'>1.1048752310043433</nm:col>
+</nm:row>
+<nm:row nm:rname='101'>
+<nm:col nm:cname='LINE NO.'>101.00000000000000</nm:col>
+<nm:col nm:cname='ID'>10.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.37000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>2.8900000000000001</nm:col>
+<nm:col nm:cname='PRED'>4.2422377349498479</nm:col>
+<nm:col nm:cname='RES'>-1.3522377349498478</nm:col>
+<nm:col nm:cname='WRES'>-3.8380360276182812</nm:col>
+</nm:row>
+<nm:row nm:rname='102'>
+<nm:col nm:cname='LINE NO.'>102.00000000000000</nm:col>
+<nm:col nm:cname='ID'>10.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.77000000000000002</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>5.2199999999999998</nm:col>
+<nm:col nm:cname='PRED'>3.6359812620843504</nm:col>
+<nm:col nm:cname='RES'>1.5840187379156494</nm:col>
+<nm:col nm:cname='WRES'>-4.0036734418700917</nm:col>
+</nm:row>
+<nm:row nm:rname='103'>
+<nm:col nm:cname='LINE NO.'>103.00000000000000</nm:col>
+<nm:col nm:cname='ID'>10.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>1.0200000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>6.4100000000000001</nm:col>
+<nm:col nm:cname='PRED'>3.2309403617408274</nm:col>
+<nm:col nm:cname='RES'>3.1790596382591727</nm:col>
+<nm:col nm:cname='WRES'>-3.6841435850464248</nm:col>
+</nm:row>
+<nm:row nm:rname='104'>
+<nm:col nm:cname='LINE NO.'>104.00000000000000</nm:col>
+<nm:col nm:cname='ID'>10.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>2.0499999999999998</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>7.8300000000000001</nm:col>
+<nm:col nm:cname='PRED'>1.9788669945618269</nm:col>
+<nm:col nm:cname='RES'>5.8511330054381734</nm:col>
+<nm:col nm:cname='WRES'>-4.0818391696276510</nm:col>
+</nm:row>
+<nm:row nm:rname='105'>
+<nm:col nm:cname='LINE NO.'>105.00000000000000</nm:col>
+<nm:col nm:cname='ID'>10.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>3.5499999999999998</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>10.210000000000001</nm:col>
+<nm:col nm:cname='PRED'>0.96890457295826182</nm:col>
+<nm:col nm:cname='RES'>9.2410954270417385</nm:col>
+<nm:col nm:cname='WRES'>3.6319020405290732</nm:col>
+</nm:row>
+<nm:row nm:rname='106'>
+<nm:col nm:cname='LINE NO.'>106.00000000000000</nm:col>
+<nm:col nm:cname='ID'>10.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>5.0499999999999998</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>9.1799999999999997</nm:col>
+<nm:col nm:cname='PRED'>0.47440078784120243</nm:col>
+<nm:col nm:cname='RES'>8.7055992121587966</nm:col>
+<nm:col nm:cname='WRES'>10.965843652195229</nm:col>
+</nm:row>
+<nm:row nm:rname='107'>
+<nm:col nm:cname='LINE NO.'>107.00000000000000</nm:col>
+<nm:col nm:cname='ID'>10.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>7.0800000000000001</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>8.0199999999999996</nm:col>
+<nm:col nm:cname='PRED'>0.18047977910521157</nm:col>
+<nm:col nm:cname='RES'>7.8395202208947881</nm:col>
+<nm:col nm:cname='WRES'>20.784521045272047</nm:col>
+</nm:row>
+<nm:row nm:rname='108'>
+<nm:col nm:cname='LINE NO.'>108.00000000000000</nm:col>
+<nm:col nm:cname='ID'>10.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>9.3800000000000008</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>7.1399999999999997</nm:col>
+<nm:col nm:cname='PRED'>6.03791911981752735E-002</nm:col>
+<nm:col nm:cname='RES'>7.0796208088018240</nm:col>
+<nm:col nm:cname='WRES'>26.007923057237921</nm:col>
+</nm:row>
+<nm:row nm:rname='109'>
+<nm:col nm:cname='LINE NO.'>109.00000000000000</nm:col>
+<nm:col nm:cname='ID'>10.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>12.100000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>5.6799999999999997</nm:col>
+<nm:col nm:cname='PRED'>1.65389548831627389E-002</nm:col>
+<nm:col nm:cname='RES'>5.6634610451168372</nm:col>
+<nm:col nm:cname='WRES'>23.779252249737198</nm:col>
+</nm:row>
+<nm:row nm:rname='110'>
+<nm:col nm:cname='LINE NO.'>110.00000000000000</nm:col>
+<nm:col nm:cname='ID'>10.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>23.699999999999999</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>2.4199999999999999</nm:col>
+<nm:col nm:cname='PRED'>6.60885247792973774E-005</nm:col>
+<nm:col nm:cname='RES'>2.4199339114752205</nm:col>
+<nm:col nm:cname='WRES'>11.122718241667808</nm:col>
+</nm:row>
+<nm:row nm:rname='111'>
+<nm:col nm:cname='LINE NO.'>111.00000000000000</nm:col>
+<nm:col nm:cname='ID'>11.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>4.9199999999999999</nm:col>
+<nm:col nm:cname='TIME'>0.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>65.000000000000000</nm:col>
+<nm:col nm:cname='DV'>0.0000000000000000</nm:col>
+<nm:col nm:cname='PRED'>0.0000000000000000</nm:col>
+<nm:col nm:cname='RES'>0.0000000000000000</nm:col>
+<nm:col nm:cname='WRES'>0.0000000000000000</nm:col>
+</nm:row>
+<nm:row nm:rname='112'>
+<nm:col nm:cname='LINE NO.'>112.00000000000000</nm:col>
+<nm:col nm:cname='ID'>11.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.25000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>4.8600000000000003</nm:col>
+<nm:col nm:cname='PRED'>4.1636451848581082</nm:col>
+<nm:col nm:cname='RES'>0.69635481514189213</nm:col>
+<nm:col nm:cname='WRES'>-0.82921879637744100</nm:col>
+</nm:row>
+<nm:row nm:rname='113'>
+<nm:col nm:cname='LINE NO.'>113.00000000000000</nm:col>
+<nm:col nm:cname='ID'>11.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.50000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>7.2400000000000002</nm:col>
+<nm:col nm:cname='PRED'>4.0916402382656321</nm:col>
+<nm:col nm:cname='RES'>3.1483597617343682</nm:col>
+<nm:col nm:cname='WRES'>-0.84385419902767411</nm:col>
+</nm:row>
+<nm:row nm:rname='114'>
+<nm:col nm:cname='LINE NO.'>114.00000000000000</nm:col>
+<nm:col nm:cname='ID'>11.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.97999999999999998</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>8.0000000000000000</nm:col>
+<nm:col nm:cname='PRED'>3.2929020802464621</nm:col>
+<nm:col nm:cname='RES'>4.7070979197535383</nm:col>
+<nm:col nm:cname='WRES'>-0.76181581262114317</nm:col>
+</nm:row>
+<nm:row nm:rname='115'>
+<nm:col nm:cname='LINE NO.'>115.00000000000000</nm:col>
+<nm:col nm:cname='ID'>11.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>1.9800000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>6.8099999999999996</nm:col>
+<nm:col nm:cname='PRED'>2.0459244653969928</nm:col>
+<nm:col nm:cname='RES'>4.7640755346030073</nm:col>
+<nm:col nm:cname='WRES'>-1.9912364760058681</nm:col>
+</nm:row>
+<nm:row nm:rname='116'>
+<nm:col nm:cname='LINE NO.'>116.00000000000000</nm:col>
+<nm:col nm:cname='ID'>11.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>3.6000000000000001</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>5.8700000000000001</nm:col>
+<nm:col nm:cname='PRED'>0.94611330994261866</nm:col>
+<nm:col nm:cname='RES'>4.9238866900573814</nm:col>
+<nm:col nm:cname='WRES'>-0.55902295235381505</nm:col>
+</nm:row>
+<nm:row nm:rname='117'>
+<nm:col nm:cname='LINE NO.'>117.00000000000000</nm:col>
+<nm:col nm:cname='ID'>11.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>5.0199999999999996</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>5.2199999999999998</nm:col>
+<nm:col nm:cname='PRED'>0.48122492520167320</nm:col>
+<nm:col nm:cname='RES'>4.7387750747983262</nm:col>
+<nm:col nm:cname='WRES'>3.9937050027906147</nm:col>
+</nm:row>
+<nm:row nm:rname='118'>
+<nm:col nm:cname='LINE NO.'>118.00000000000000</nm:col>
+<nm:col nm:cname='ID'>11.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>7.0300000000000002</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>4.4500000000000002</nm:col>
+<nm:col nm:cname='PRED'>0.18482742126536947</nm:col>
+<nm:col nm:cname='RES'>4.2651725787346306</nm:col>
+<nm:col nm:cname='WRES'>10.173152615163357</nm:col>
+</nm:row>
+<nm:row nm:rname='119'>
+<nm:col nm:cname='LINE NO.'>119.00000000000000</nm:col>
+<nm:col nm:cname='ID'>11.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>9.0299999999999994</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>3.6200000000000001</nm:col>
+<nm:col nm:cname='PRED'>7.13267220154143872E-002</nm:col>
+<nm:col nm:cname='RES'>3.5486732779845855</nm:col>
+<nm:col nm:cname='WRES'>11.795871278243503</nm:col>
+</nm:row>
+<nm:row nm:rname='120'>
+<nm:col nm:cname='LINE NO.'>120.00000000000000</nm:col>
+<nm:col nm:cname='ID'>11.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>12.119999999999999</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>2.6899999999999999</nm:col>
+<nm:col nm:cname='PRED'>1.63822263083454600E-002</nm:col>
+<nm:col nm:cname='RES'>2.6736177736916544</nm:col>
+<nm:col nm:cname='WRES'>10.938391934520894</nm:col>
+</nm:row>
+<nm:row nm:rname='121'>
+<nm:col nm:cname='LINE NO.'>121.00000000000000</nm:col>
+<nm:col nm:cname='ID'>11.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>24.079999999999998</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>0.85999999999999999</nm:col>
+<nm:col nm:cname='PRED'>5.51516323942155066E-005</nm:col>
+<nm:col nm:cname='RES'>0.85994484836760576</nm:col>
+<nm:col nm:cname='WRES'>3.9498834759379111</nm:col>
+</nm:row>
+<nm:row nm:rname='122'>
+<nm:col nm:cname='LINE NO.'>122.00000000000000</nm:col>
+<nm:col nm:cname='ID'>12.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>5.2999999999999998</nm:col>
+<nm:col nm:cname='TIME'>0.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>60.500000000000000</nm:col>
+<nm:col nm:cname='DV'>0.0000000000000000</nm:col>
+<nm:col nm:cname='PRED'>0.0000000000000000</nm:col>
+<nm:col nm:cname='RES'>0.0000000000000000</nm:col>
+<nm:col nm:cname='WRES'>0.0000000000000000</nm:col>
+</nm:row>
+<nm:row nm:rname='123'>
+<nm:col nm:cname='LINE NO.'>123.00000000000000</nm:col>
+<nm:col nm:cname='ID'>12.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.25000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>1.2500000000000000</nm:col>
+<nm:col nm:cname='PRED'>4.1636451848581082</nm:col>
+<nm:col nm:cname='RES'>-2.9136451848581082</nm:col>
+<nm:col nm:cname='WRES'>-3.8665616121794901</nm:col>
+</nm:row>
+<nm:row nm:rname='124'>
+<nm:col nm:cname='LINE NO.'>124.00000000000000</nm:col>
+<nm:col nm:cname='ID'>12.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>0.50000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>3.9600000000000000</nm:col>
+<nm:col nm:cname='PRED'>4.0916402382656321</nm:col>
+<nm:col nm:cname='RES'>-0.13164023826563209</nm:col>
+<nm:col nm:cname='WRES'>-4.4150592426968878</nm:col>
+</nm:row>
+<nm:row nm:rname='125'>
+<nm:col nm:cname='LINE NO.'>125.00000000000000</nm:col>
+<nm:col nm:cname='ID'>12.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>1.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>7.8200000000000003</nm:col>
+<nm:col nm:cname='PRED'>3.2617809300598877</nm:col>
+<nm:col nm:cname='RES'>4.5582190699401126</nm:col>
+<nm:col nm:cname='WRES'>-2.9702691244084218</nm:col>
+</nm:row>
+<nm:row nm:rname='126'>
+<nm:col nm:cname='LINE NO.'>126.00000000000000</nm:col>
+<nm:col nm:cname='ID'>12.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>2.0000000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>9.7200000000000006</nm:col>
+<nm:col nm:cname='PRED'>2.0265366191960377</nm:col>
+<nm:col nm:cname='RES'>7.6934633808039630</nm:col>
+<nm:col nm:cname='WRES'>-1.8575445363973784</nm:col>
+</nm:row>
+<nm:row nm:rname='127'>
+<nm:col nm:cname='LINE NO.'>127.00000000000000</nm:col>
+<nm:col nm:cname='ID'>12.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>3.5200000000000000</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>9.7500000000000000</nm:col>
+<nm:col nm:cname='PRED'>0.98284202429585532</nm:col>
+<nm:col nm:cname='RES'>8.7671579757041442</nm:col>
+<nm:col nm:cname='WRES'>2.0335211665156780</nm:col>
+</nm:row>
+<nm:row nm:rname='128'>
+<nm:col nm:cname='LINE NO.'>128.00000000000000</nm:col>
+<nm:col nm:cname='ID'>12.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>5.0700000000000003</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>8.5700000000000003</nm:col>
+<nm:col nm:cname='PRED'>0.46990520998300034</nm:col>
+<nm:col nm:cname='RES'>8.1000947900169997</nm:col>
+<nm:col nm:cname='WRES'>9.0635847075674665</nm:col>
+</nm:row>
+<nm:row nm:rname='129'>
+<nm:col nm:cname='LINE NO.'>129.00000000000000</nm:col>
+<nm:col nm:cname='ID'>12.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>7.0700000000000003</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>6.5899999999999999</nm:col>
+<nm:col nm:cname='PRED'>0.18134104807927817</nm:col>
+<nm:col nm:cname='RES'>6.4086589519207218</nm:col>
+<nm:col nm:cname='WRES'>14.685450185391433</nm:col>
+</nm:row>
+<nm:row nm:rname='130'>
+<nm:col nm:cname='LINE NO.'>130.00000000000000</nm:col>
+<nm:col nm:cname='ID'>12.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>9.0299999999999994</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>6.1100000000000003</nm:col>
+<nm:col nm:cname='PRED'>7.13267220154143872E-002</nm:col>
+<nm:col nm:cname='RES'>6.0386732779845858</nm:col>
+<nm:col nm:cname='WRES'>20.519510233435536</nm:col>
+</nm:row>
+<nm:row nm:rname='131'>
+<nm:col nm:cname='LINE NO.'>131.00000000000000</nm:col>
+<nm:col nm:cname='ID'>12.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>12.050000000000001</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>4.5700000000000003</nm:col>
+<nm:col nm:cname='PRED'>1.69373677019919802E-002</nm:col>
+<nm:col nm:cname='RES'>4.5530626322980083</nm:col>
+<nm:col nm:cname='WRES'>18.696387610437096</nm:col>
+</nm:row>
+<nm:row nm:rname='132'>
+<nm:col nm:cname='LINE NO.'>132.00000000000000</nm:col>
+<nm:col nm:cname='ID'>12.000000000000000</nm:col>
+<nm:col nm:cname='AMT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='TIME'>24.149999999999999</nm:col>
+<nm:col nm:cname='BWT'>0.0000000000000000</nm:col>
+<nm:col nm:cname='DV'>1.1699999999999999</nm:col>
+<nm:col nm:cname='PRED'>5.33439752300149218E-005</nm:col>
+<nm:col nm:cname='RES'>1.1699466560247700</nm:col>
+<nm:col nm:cname='WRES'>5.3719169588911848</nm:col>
+</nm:row>
+</nm:table>
+</nm:problem>
+</nm:nonmem>
+<nm:stop_datetime>2015-02-15T17:55:29.887</nm:stop_datetime>
+<nm:total_cputime>1.016</nm:total_cputime>
+</nm:output>

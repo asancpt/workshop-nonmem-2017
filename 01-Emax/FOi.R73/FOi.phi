@@ -1,0 +1,6 @@
+TABLE NO.     1: First Order with Interaction: Problem=1 Subproblem=0 Superproblem1=0 Iteration1=0 Superproblem2=0 Iteration2=0
+ SUBJECT_NO   ID           ETA(1)       ETC(1,1)     OBJ
+            1            1  0.00000E+00  0.00000E+00    56.093562977997252
+            2            2  0.00000E+00  0.00000E+00    44.806153448812324
+            3            3  0.00000E+00  0.00000E+00    58.566970986871780
+            4            4  0.00000E+00  0.00000E+00    59.690372081510027

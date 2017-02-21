@@ -1,0 +1,258 @@
+%PDF-1.4
+%Å‚Å„ÅœÅ”\r
+1 0 obj
+<<
+/CreationDate (D:20091227124644)
+/ModDate (D:20091227124644)
+/Title (Report of NONMEM VI single-run)
+/Producer (R 2.10.1)
+/Creator (R)
+>>
+endobj
+2 0 obj
+<<
+/Type /Catalog
+/Pages 3 0 R
+>>
+endobj
+5 0 obj
+<<
+/Type /Page
+/Parent 3 0 R
+/Contents 6 0 R
+/Resources 4 0 R
+>>
+endobj
+6 0 obj
+<<
+/Length 7 0 R
+>>
+stream
+q
+Q q 18.00 18.00 576.00 756.00 re W n
+Q q 18.00 18.00 576.00 756.00 re W n
+BT
+0.000 0.000 0.000 rg
+/F2 1 Tf 12.00 0.00 -0.00 12.00 39.33 736.79 Tm (Summary 2 - Parameters) Tj
+ET
+BT
+/F2 1 Tf 10.00 0.00 -0.00 10.00 39.33 710.82 Tm (Thetas) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 51.32 685.75 Tm (Number of All Thetas     : 5) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 51.32 672.79 Tm (Number of Fixed Thetas   : 0) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 51.32 659.96 Tm (Number of Unfixed Thetas : 5) Tj
+ET
+BT
+/F2 1 Tf 9.00 0.00 -0.00 9.00 45.33 608.25 Tm (Estimated Thetas) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 595.75 Tm (        Point Estitmate Standard Error          LL         UL ZERO ONE) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 582.99 Tm (Theta 1       2.8319930     0.21960630  2.39278040  3.2712056    0   0) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 570.15 Tm (Theta 2      32.4448900     1.68794700 29.06899600 35.8207840    0   0) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 557.31 Tm (Theta 3       1.4905480     0.30195740  0.88663320  2.0944628    0   1) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 544.46 Tm (Theta 4       0.2878395     0.20667350 -0.12550750  0.7011865    1   0) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 531.62 Tm (Theta 5       0.1305302     0.04639297  0.03774426  0.2233161    0   0) Tj
+ET
+BT
+/F2 1 Tf 7.00 0.00 -0.00 7.00 69.30 512.56 Tm (*LL  : Lower Limit) Tj
+ET
+BT
+/F2 1 Tf 7.00 0.00 -0.00 7.00 69.30 506.64 Tm ( UL  : Upper Limit) Tj
+ET
+BT
+/F2 1 Tf 7.00 0.00 -0.00 7.00 69.30 500.21 Tm ( ZERO: Is this maybe zero? 0:No, 1:Yes) Tj
+ET
+BT
+/F2 1 Tf 7.00 0.00 -0.00 7.00 69.30 493.79 Tm ( ONE : Is this maybe one?  0:No, 1:Yes) Tj
+ET
+Q
+endstream
+endobj
+7 0 obj
+1691
+endobj
+8 0 obj
+<<
+/Type /Page
+/Parent 3 0 R
+/Contents 9 0 R
+/Resources 4 0 R
+>>
+endobj
+9 0 obj
+<<
+/Length 10 0 R
+>>
+stream
+q
+Q q 18.00 18.00 576.00 756.00 re W n
+Q q 18.00 18.00 576.00 756.00 re W n
+Q q 18.00 18.00 576.00 756.00 re W n
+BT
+0.000 0.000 0.000 rg
+/F2 1 Tf 10.00 0.00 -0.00 10.00 39.33 711.77 Tm (Omegas) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 51.32 685.75 Tm (Number of Etas           : 3) Tj
+ET
+BT
+/F2 1 Tf 9.00 0.00 -0.00 9.00 45.33 660.26 Tm (Omega Matrix) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 634.40 Tm (           Eta 1      Eta 2     Eta 3) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 621.55 Tm (Eta 1 0.06380562 0.89487473 0.3028273) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 608.71 Tm (Eta 2 0.03148180 0.01939705 0.6198483) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 595.87 Tm (Eta 3 0.05043237 0.05691650 0.4346802) Tj
+ET
+BT
+/F2 1 Tf 7.00 0.00 -0.00 7.00 69.30 577.28 Tm (*Lower triangle is covariance matrix.) Tj
+ET
+BT
+/F2 1 Tf 7.00 0.00 -0.00 7.00 69.30 570.86 Tm ( Upper triangle is correlation matrix.) Tj
+ET
+BT
+/F2 1 Tf 7.00 0.00 -0.00 7.00 69.30 564.43 Tm ( Diagnoal elements are variances.) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 51.32 544.92 Tm (Square root of diagonal elements \(x100\)) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 81.28 531.65 Tm (Eta 1) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 81.28 518.80 Tm (25.26) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 129.22 531.65 Tm (Eta 2) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 129.22 518.80 Tm (13.93) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 177.16 531.65 Tm (Eta 3) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 177.16 518.80 Tm (65.93) Tj
+ET
+BT
+/F2 1 Tf 9.00 0.00 -0.00 9.00 45.33 480.45 Tm (Standard Error of Omega Matrix) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 454.58 Tm (            Eta 1       Eta 2      Eta 3) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 441.74 Tm (Eta 1 0.029518600 0.008738619 0.03989847) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 428.89 Tm (Eta 2 0.008738619 0.008617111 0.03600704) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 416.05 Tm (Eta 3 0.039898470 0.036007040 0.22262160) Tj
+ET
+BT
+/F2 1 Tf 9.00 0.00 -0.00 9.00 45.33 377.69 Tm (Relative Standard Error\(%\) of Omega Matrix) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 351.83 Tm (         Eta 1    Eta 2    Eta 3) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 338.98 Tm (Eta 1 46.26332 27.75769 79.11282) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 326.14 Tm (Eta 2 27.75769 44.42485 63.26292) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 63.30 313.30 Tm (Eta 3 79.11282 63.26292 51.21503) Tj
+ET
+BT
+/F2 1 Tf 10.00 0.00 -0.00 10.00 39.33 287.54 Tm (Sigmas) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 51.32 262.35 Tm (Number of Epsilons       : 1) Tj
+ET
+BT
+/F2 1 Tf 8.00 0.00 -0.00 8.00 51.32 236.09 Tm (Fixed as 1) Tj
+ET
+Q
+endstream
+endobj
+10 0 obj
+2663
+endobj
+3 0 obj
+<<
+/Type /Pages
+/Kids [
+5 0 R
+8 0 R
+]
+/Count 2
+/MediaBox [0 0 612 792]
+>>
+endobj
+4 0 obj
+<<
+/ProcSet [/PDF /Text]
+/Font <</F2 12 0 R >>
+/ExtGState << >>
+>>
+endobj
+11 0 obj
+<<
+/Type /Encoding
+/BaseEncoding /WinAnsiEncoding
+/Differences [ 45/minus ]
+>>
+endobj
+12 0 obj <<
+/Type /Font
+/Subtype /Type1
+/Name /F2
+/BaseFont /Courier
+/Encoding 11 0 R
+>> endobj
+xref
+0 13
+0000000000 65535 f 
+0000000021 00000 n 
+0000000177 00000 n 
+0000004888 00000 n 
+0000004977 00000 n 
+0000000226 00000 n 
+0000000306 00000 n 
+0000002050 00000 n 
+0000002070 00000 n 
+0000002150 00000 n 
+0000004867 00000 n 
+0000005059 00000 n 
+0000005154 00000 n 
+trailer
+<<
+/Size 13
+/Info 1 0 R
+/Root 2 0 R
+>>
+startxref
+5250
+%%EOF
