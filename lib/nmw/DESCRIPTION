@@ -1,0 +1,16 @@
+Package: nmw
+Version: 0.1.0
+Title: NONMEM Workshop 2017
+Description: This is an R package for NONMEM Workshop held by AMC CPT. 
+Depends: R (>= 3.0.0)
+ByteCompile: yes
+License: GPL-3
+Copyright: 2017, Kyun-Seop Bae
+Author: Kyun-Seop Bae
+Maintainer: Kyun-Seop Bae <k@acr.kr>
+URL: http://optimizer.r-forge.r-project.org/
+NeedsCompilation: no
+Packaged: 
+Repository:
+Date: 2017-02-18
+Built: R 3.3.2; ; 2017-02-21 03:25:11 UTC; windows
